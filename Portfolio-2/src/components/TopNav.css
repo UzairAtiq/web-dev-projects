@@ -104,3 +104,27 @@
 .nav-hamburger:hover .hamburger-line:nth-child(2) {
   width: 24px;
 }
+
+/* ═══════════════════════════════════════════════════════════
+   Responsive Styles
+   ═══════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .top-nav {
+    padding: 1rem 1.5rem;
+  }
+  
+  .logo-text {
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+  }
+  
+  .nav-right {
+    gap: 1rem;
+  }
+  
+  .nav-icon {
+    width: 20px;
+    height: 20px;
+  }
+}

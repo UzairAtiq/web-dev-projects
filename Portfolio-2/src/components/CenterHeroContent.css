@@ -96,20 +96,20 @@
 }
 
 .heading-line {
-  font-family: var(--font-serif);
+  font-family: var(--font-display);
   font-size: 4.5rem;
-  font-weight: 500;
+  font-weight: 700;
   line-height: 1.1;
   color: var(--color-text);
   letter-spacing: -0.02em;
 }
 
 .heading-accent {
-  font-style: italic;
+  font-style: normal;
   background: linear-gradient(
     135deg,
-    var(--color-text) 0%,
-    var(--color-accent) 100%
+    var(--color-accent) 0%,
+    var(--color-accent-light) 100%
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -119,9 +119,108 @@
 /* Subtitle */
 .hero-subtitle {
   font-size: 1rem;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.8;
   color: var(--color-text);
   opacity: 0.7;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.02em;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Responsive Styles - Prevent overlay with sidebar
+   ═══════════════════════════════════════════════════════════ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .decorative-rings {
+    width: 450px;
+    height: 450px;
+  }
+  
+  .ring-outer {
+    width: 420px;
+    height: 420px;
+  }
+  
+  .ring-middle {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .ring-inner {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .heading-line {
+    font-size: 3.5rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .center-hero-content {
+    width: 90%;
+    padding: 0 1rem;
+  }
+  
+  .decorative-rings {
+    width: 320px;
+    height: 320px;
+  }
+  
+  .ring-outer {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .ring-middle {
+    width: 220px;
+    height: 220px;
+  }
+  
+  .ring-inner {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .heading-line {
+    font-size: 2.5rem;
+  }
+  
+  .hero-label {
+    font-size: 0.65rem;
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.9rem;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  .heading-line {
+    font-size: 2rem;
+  }
+  
+  .decorative-rings {
+    width: 260px;
+    height: 260px;
+  }
+  
+  .ring-outer {
+    width: 240px;
+    height: 240px;
+  }
+  
+  .ring-middle {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .ring-inner {
+    width: 120px;
+    height: 120px;
+  }
 }

@@ -2,23 +2,27 @@
    GLOBAL STYLES - Portfolio Main Page
    Color Scheme:
    - #000000 → base background, deepest shadows
-   - #0C1821 → secondary background layers
-   - #1b2a41 → overlay panels, cards
-   - #324a5f → borders, dividers, UI accents
-   - #ccc9dc → primary text, headings, icons
+   - #0a0a0a → secondary background layers
+   - #1a1a1a → overlay panels, cards
+   - #E63946 → primary red accent
+   - #FF4D5A → lighter red for hovers/highlights
+   - #f5f5f5 → primary text, headings, icons
    ═══════════════════════════════════════════════════════════ */
 
 :root {
-  /* Color Variables */
+  /* Color Variables - Red Theme */
   --color-base: #000000;
-  --color-secondary: #0C1821;
-  --color-panel: #1b2a41;
-  --color-accent: #324a5f;
-  --color-text: #ccc9dc;
+  --color-secondary: #0a0a0a;
+  --color-panel: #1a1a1a;
+  --color-accent: #E63946;
+  --color-accent-light: #FF4D5A;
+  --color-text: #f5f5f5;
+  --color-text-muted: #888888;
+  --color-border: #2a2a2a;
   
-  /* Typography */
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  /* Typography - Circular Bold Style (Poppins) */
+  --font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
   
   /* Transitions */
   --transition-fast: 0.2s ease;
@@ -64,5 +68,5 @@ body {
   border: 0;
 }
 
-/* Google Fonts Import */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+/* Google Fonts Import - Poppins (Circular Bold Style) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');

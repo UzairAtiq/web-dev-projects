@@ -91,3 +91,39 @@
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(5px); }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   Responsive Styles
+   ═══════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .bottom-ui {
+    padding: 1.5rem;
+    padding-bottom: 5rem; /* Space for repositioned social bar */
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  
+  .progress-container {
+    order: 2;
+  }
+  
+  .scroll-indicator {
+    order: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .bottom-ui {
+    padding-bottom: 4.5rem;
+  }
+  
+  .progress-segment {
+    width: 30px;
+  }
+  
+  .progress-segment.active {
+    width: 45px;
+  }
+}
