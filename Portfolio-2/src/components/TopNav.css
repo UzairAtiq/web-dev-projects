@@ -1,0 +1,106 @@
+/* ═══════════════════════════════════════════════════════════
+   TopNav.css - Top Navigation Bar Styles
+   ═══════════════════════════════════════════════════════════ */
+
+.top-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  padding: 1.5rem 3rem;
+  background: transparent;
+}
+
+/* Logo Styles */
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo {
+  text-decoration: none;
+  display: flex;
+  align-items: baseline;
+  transition: opacity var(--transition-fast);
+}
+
+.nav-logo:hover {
+  opacity: 0.8;
+}
+
+.logo-text {
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--color-text);
+}
+
+.logo-dot {
+  color: var(--color-accent);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-left: 2px;
+}
+
+/* Right Icons */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity var(--transition-fast);
+}
+
+.nav-icon-btn:hover {
+  opacity: 0.7;
+}
+
+.nav-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--color-text);
+}
+
+/* Hamburger Menu */
+.nav-hamburger {
+  flex-direction: column;
+  gap: 5px;
+  padding: 0.5rem;
+}
+
+.hamburger-line {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--color-text);
+  transition: all var(--transition-fast);
+}
+
+.hamburger-line:nth-child(2) {
+  width: 18px;
+  margin-left: auto;
+}
+
+.nav-hamburger:hover .hamburger-line {
+  background-color: var(--color-accent);
+}
+
+.nav-hamburger:hover .hamburger-line:nth-child(2) {
+  width: 24px;
+}

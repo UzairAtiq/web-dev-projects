@@ -1,0 +1,82 @@
+/* ═══════════════════════════════════════════════════════════
+   LeftOverlayPanel.css - Left Overlay Panel Styles
+   ═══════════════════════════════════════════════════════════ */
+
+.left-overlay-panel {
+  position: absolute;
+  left: 100px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  
+  padding: 1.5rem;
+  background: rgba(27, 42, 65, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(50, 74, 95, 0.4);
+  border-radius: 4px;
+  
+  min-width: 200px;
+}
+
+/* Panel Header */
+.panel-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(50, 74, 95, 0.4);
+}
+
+.panel-number {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+.panel-divider {
+  width: 20px;
+  height: 1px;
+  background: var(--color-accent);
+  opacity: 0.5;
+}
+
+.panel-title {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--color-text);
+  opacity: 0.9;
+}
+
+/* Panel List */
+.panel-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.panel-list-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.item-label {
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  opacity: 0.8;
+}
+
+.item-value {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--color-text);
+  opacity: 0.9;
+}

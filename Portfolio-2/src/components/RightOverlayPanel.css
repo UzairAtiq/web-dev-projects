@@ -1,0 +1,61 @@
+/* ═══════════════════════════════════════════════════════════
+   RightOverlayPanel.css - Right Overlay Panel Styles
+   ═══════════════════════════════════════════════════════════ */
+
+.right-overlay-panel {
+  position: absolute;
+  right: 100px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  
+  padding: 1.5rem;
+  background: rgba(27, 42, 65, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(50, 74, 95, 0.4);
+  border-radius: 4px;
+  
+  max-width: 180px;
+  text-align: left;
+}
+
+/* Large Symbol */
+.panel-symbol {
+  font-size: 2rem;
+  color: var(--color-accent);
+  margin-bottom: 1rem;
+  opacity: 0.8;
+}
+
+/* Panel Content */
+.panel-content {
+  margin-bottom: 1.25rem;
+}
+
+.panel-heading {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  color: var(--color-text);
+  margin-bottom: 0.75rem;
+}
+
+.panel-description {
+  font-size: 0.8rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--color-text);
+  opacity: 0.75;
+}
+
+/* Accent Line */
+.panel-accent-line {
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    var(--color-accent) 0%,
+    transparent 100%
+  );
+}

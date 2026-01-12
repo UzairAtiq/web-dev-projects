@@ -1,0 +1,93 @@
+/* ═══════════════════════════════════════════════════════════
+   BottomUI.css - Bottom UI Elements Styles
+   ═══════════════════════════════════════════════════════════ */
+
+.bottom-ui {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 2rem 3rem;
+}
+
+/* Progress Indicator */
+.progress-container {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.progress-track {
+  display: flex;
+}
+
+.progress-segments {
+  display: flex;
+  gap: 8px;
+}
+
+.progress-segment {
+  width: 40px;
+  height: 3px;
+  background: rgba(50, 74, 95, 0.4);
+  border-radius: 4px;
+  transition: all var(--transition-smooth);
+}
+
+.progress-segment.active {
+  background: var(--color-text);
+  width: 60px;
+}
+
+.progress-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  color: var(--color-text);
+  opacity: 0.6;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+}
+
+.scroll-indicator:hover {
+  opacity: 0.7;
+}
+
+.scroll-text {
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--color-text);
+  opacity: 0.7;
+}
+
+.scroll-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: bounceArrow 2s ease-in-out infinite;
+}
+
+.scroll-arrow svg {
+  width: 18px;
+  height: 18px;
+  color: var(--color-text);
+  opacity: 0.8;
+}
+
+@keyframes bounceArrow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}

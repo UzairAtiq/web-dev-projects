@@ -1,0 +1,68 @@
+/* ═══════════════════════════════════════════════════════════
+   GLOBAL STYLES - Portfolio Main Page
+   Color Scheme:
+   - #000000 → base background, deepest shadows
+   - #0C1821 → secondary background layers
+   - #1b2a41 → overlay panels, cards
+   - #324a5f → borders, dividers, UI accents
+   - #ccc9dc → primary text, headings, icons
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  /* Color Variables */
+  --color-base: #000000;
+  --color-secondary: #0C1821;
+  --color-panel: #1b2a41;
+  --color-accent: #324a5f;
+  --color-text: #ccc9dc;
+  
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-smooth: 0.4s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-base);
+  color: var(--color-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Utility Classes */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
