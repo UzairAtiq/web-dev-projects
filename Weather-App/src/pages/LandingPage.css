@@ -28,6 +28,7 @@
   width: 300px;
   height: auto;
   filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
+  mix-blend-mode: screen;
 }
 
 .landing-text {
@@ -40,6 +41,7 @@
 .small-logo {
   width: 40px;
   margin-bottom: 30px;
+  mix-blend-mode: screen;
 }
 
 .landing-title {

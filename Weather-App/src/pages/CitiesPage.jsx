@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import './CitiesPage.css';
 import { Search, Sun, Cloud, Thermometer, Wind, Eye, Droplets, MapPin } from 'lucide-react';
+import { useWeather } from '../context/WeatherContext';
 
 const CitiesPage = () => {
-  const [selectedCity, setSelectedCity] = useState('Madrid');
+  const { selectedCity, setSelectedCity, units } = useWeather();
+  const [searchTerm, setSearchTerm] = useState('');
 
   const cities = [
     { name: 'Madrid', country: 'Spain', temp: '31', time: '10:23', icon: <Sun color="var(--accent-yellow)" /> },
@@ -11,18 +13,34 @@ const CitiesPage = () => {
     { name: 'Athens', country: 'Greece', temp: '33', time: '12:23', icon: <Sun color="var(--accent-yellow)" /> },
   ];
 
+  const filteredCities = cities.filter(city => 
+    city.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const convertTemp = (temp) => {
+    if (units.temperature === 'Fahrenheit') {
+      return Math.round((temp * 9/5) + 32);
+    }
+    return temp;
+  };
+
   return (
     <div className="cities-page fade-in">
       <div className="search-container">
         <div className="search-bar">
           <Search size={18} className="search-icon" />
-          <input type="text" placeholder="Search for cities" />
+          <input 
+            type="text" 
+            placeholder="Search for cities" 
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
         </div>
       </div>
 
       <div className="cities-layout">
         <div className="cities-list">
-          {cities.map((city, index) => (
+          {filteredCities.map((city, index) => (
             <div 
               key={index} 
               className={`city-card ${selectedCity === city.name ? 'active' : ''}`}
@@ -38,10 +56,11 @@ const CitiesPage = () => {
                 </div>
               </div>
               <div className="city-card-right">
-                <span className="city-temp">{city.temp}°</span>
+                <span className="city-temp">{convertTemp(city.temp)}°</span>
               </div>
             </div>
           ))}
+          {filteredCities.length === 0 && <p className="no-cities">No cities found...</p>}
         </div>
 
         <div className="city-detail-section">
@@ -49,7 +68,7 @@ const CitiesPage = () => {
             <div className="city-title-group">
               <h2>{selectedCity}</h2>
               <p>Chance of rain: 0%</p>
-              <div className="detail-temp">31°</div>
+              <div className="detail-temp">{convertTemp(31)}°</div>
             </div>
             <Sun size={120} color="var(--accent-yellow)" fill="var(--accent-yellow)" />
           </div>
@@ -61,7 +80,7 @@ const CitiesPage = () => {
                 <div key={i} className="detail-hour-item">
                   <span>{time}</span>
                   <Sun size={24} color="var(--accent-yellow)" />
-                  <strong>{i === 0 ? '25°' : i === 1 ? '28°' : '33°'}</strong>
+                  <strong>{convertTemp(i === 0 ? 25 : i === 1 ? 28 : 33)}°</strong>
                 </div>
               ))}
             </div>
@@ -77,7 +96,7 @@ const CitiesPage = () => {
                     <Sun size={20} color="var(--accent-yellow)" />
                     <span>Sunny</span>
                   </div>
-                  <span><strong>37</strong>/21</span>
+                  <span><strong>{convertTemp(37)}</strong>/{convertTemp(21)}</span>
                 </div>
               ))}
             </div>

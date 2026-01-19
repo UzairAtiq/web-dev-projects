@@ -1,14 +1,24 @@
 import React from 'react';
 import './MapPage.css';
 import { Search, Plus, Minus, Navigation, Sun, Cloud, CloudRain } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { useWeather } from '../context/WeatherContext';
 
 const MapPage = () => {
+  const navigate = useNavigate();
+  const { setSelectedCity } = useWeather();
+
   const mapCities = [
     { name: 'Bilbao', temp: '27°', icon: <CloudRain size={24} />, top: '15%', left: '30%' },
     { name: 'Barcelona', temp: '29°', icon: <Sun size={24} color="var(--accent-yellow)" />, top: '35%', left: '75%' },
     { name: 'Madrid', temp: '31°', icon: <Sun size={24} color="var(--accent-yellow)" />, top: '55%', left: '45%' },
     { name: 'Malaga', temp: '33°', icon: <Cloud size={24} />, top: '80%', left: '45%' },
   ];
+
+  const handleCityClick = (cityName) => {
+    setSelectedCity(cityName);
+    navigate('/weather');
+  };
 
   return (
     <div className="map-page fade-in">
@@ -22,7 +32,6 @@ const MapPage = () => {
       <div className="map-layout">
         <div className="map-view-container">
           <div className="map-visual">
-            {/* Using a stylized SVG or DIV background for the map */}
             <div className="map-placeholder">
               {mapCities.map((city, idx) => (
                 <div key={idx} className="map-marker" style={{ top: city.top, left: city.left }}>
@@ -30,7 +39,14 @@ const MapPage = () => {
                     <h4>{city.name}</h4>
                     {city.icon}
                     <span className="marker-temp">{city.temp}</span>
-                    {city.name === 'Madrid' && <button className="see-detail-btn">See detail</button>}
+                    {city.name === 'Madrid' && (
+                      <button 
+                        className="see-detail-btn"
+                        onClick={() => handleCityClick(city.name)}
+                      >
+                        See detail
+                      </button>
+                    )}
                   </div>
                 </div>
               ))}
@@ -41,13 +57,18 @@ const MapPage = () => {
               <button><Minus size={20} /></button>
               <button className="nav-btn"><Navigation size={20} /></button>
             </div>
-            <button className="done-btn">Done</button>
+            <button className="done-btn" onClick={() => navigate('/weather')}>Done</button>
           </div>
         </div>
 
         <div className="map-sidebar">
           {mapCities.map((city, idx) => (
-            <div key={idx} className="map-city-item">
+            <div 
+              key={idx} 
+              className="map-city-item" 
+              onClick={() => handleCityClick(city.name)}
+              style={{ cursor: 'pointer' }}
+            >
               <div className="m-city-left">
                 {city.icon}
                 <div className="m-city-info">

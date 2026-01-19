@@ -1,8 +1,28 @@
 import React from 'react';
 import './SettingsPage.css';
 import { Search, ChevronRight } from 'lucide-react';
+import { useWeather } from '../context/WeatherContext';
 
 const SettingsPage = () => {
+  const { units, toggleUnit, notifications, toggleNotifications } = useWeather();
+
+  const renderUnitRow = (label, category, options) => (
+    <div className="unit-row">
+      <span>{label}</span>
+      <div className="toggle-group">
+        {options.map(opt => (
+          <button 
+            key={opt}
+            className={units[category] === opt ? 'active' : ''}
+            onClick={() => toggleUnit(category, opt)}
+          >
+            {opt}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+
   return (
     <div className="settings-page fade-in">
       <div className="search-container">
@@ -17,44 +37,11 @@ const SettingsPage = () => {
           <section className="settings-section">
             <h3>Units</h3>
             <div className="unit-card">
-              <div className="unit-row">
-                <span>TEMPERATURE</span>
-                <div className="toggle-group">
-                  <button className="active">Celsius</button>
-                  <button>Fahrenheit</button>
-                </div>
-              </div>
-              <div className="unit-row">
-                <span>WIND SPEED</span>
-                <div className="toggle-group">
-                  <button className="active">km/h</button>
-                  <button>m/s</button>
-                  <button>Knots</button>
-                </div>
-              </div>
-              <div className="unit-row">
-                <span>PRESSURE</span>
-                <div className="toggle-group">
-                  <button>hPa</button>
-                  <button>Inches</button>
-                  <button>kPa</button>
-                  <button className="active">mm</button>
-                </div>
-              </div>
-              <div className="unit-row">
-                <span>PRECIPITATION</span>
-                <div className="toggle-group">
-                  <button className="active">Milimeters</button>
-                  <button>Inches</button>
-                </div>
-              </div>
-              <div className="unit-row">
-                <span>DISTANCE</span>
-                <div className="toggle-group">
-                  <button className="active">Kilometers</button>
-                  <button>Miles</button>
-                </div>
-              </div>
+              {renderUnitRow('TEMPERATURE', 'temperature', ['Celsius', 'Fahrenheit'])}
+              {renderUnitRow('WIND SPEED', 'windSpeed', ['km/h', 'm/s', 'Knots'])}
+              {renderUnitRow('PRESSURE', 'pressure', ['hPa', 'Inches', 'kPa', 'mm'])}
+              {renderUnitRow('PRECIPITATION', 'precipitation', ['Milimeters', 'Inches'])}
+              {renderUnitRow('DISTANCE', 'distance', ['Kilometers', 'Miles'])}
             </div>
           </section>
 
@@ -66,7 +53,10 @@ const SettingsPage = () => {
                   <span>Notifications</span>
                   <p>Be aware of the weather</p>
                 </div>
-                <div className="switch active"></div>
+                <div 
+                  className={`switch ${notifications ? 'active' : ''}`}
+                  onClick={toggleNotifications}
+                ></div>
               </div>
             </div>
           </section>
