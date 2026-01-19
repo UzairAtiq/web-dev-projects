@@ -1,10 +1,13 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { CloudRain, List, Map, Settings } from 'lucide-react';
+import { CloudRain, List, Map, Settings, Sun, Moon } from 'lucide-react';
 import umbrellaImg from '../assets/umbrella.png';
+import { useWeather } from '../context/WeatherContext';
 import './Sidebar.css';
 
 const Sidebar = () => {
+  const { theme, toggleTheme } = useWeather();
+
   return (
     <aside className="sidebar glass-card">
       <div className="sidebar-logo">
@@ -32,6 +35,10 @@ const Sidebar = () => {
           <span>Settings</span>
         </NavLink>
       </nav>
+
+      <button className="theme-toggle" onClick={toggleTheme}>
+        {theme === 'dark' ? <Sun size={24} /> : <Moon size={24} />}
+      </button>
     </aside>
   );
 };
