@@ -23,7 +23,7 @@ const MapPage = () => {
   return (
     <div className="map-page fade-in">
       <div className="search-container">
-        <div className="search-bar">
+        <div className="search-bar glass-card">
           <Search size={18} className="search-icon" />
           <input type="text" placeholder="Spain" />
         </div>
@@ -35,7 +35,7 @@ const MapPage = () => {
             <div className="map-placeholder">
               {mapCities.map((city, idx) => (
                 <div key={idx} className="map-marker" style={{ top: city.top, left: city.left }}>
-                  <div className="marker-content">
+                  <div className="marker-content glass-card">
                     <h4>{city.name}</h4>
                     {city.icon}
                     <span className="marker-temp">{city.temp}</span>
@@ -65,7 +65,7 @@ const MapPage = () => {
           {mapCities.map((city, idx) => (
             <div 
               key={idx} 
-              className="map-city-item" 
+              className="map-city-item glass-card" 
               onClick={() => handleCityClick(city.name)}
               style={{ cursor: 'pointer' }}
             >

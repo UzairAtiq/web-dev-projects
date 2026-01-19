@@ -16,7 +16,7 @@ const WeatherPage = () => {
   return (
     <div className="weather-page fade-in">
       <div className="search-container">
-        <div className="search-bar">
+        <div className="search-bar glass-card">
           <Search size={18} className="search-icon" />
           <input type="text" placeholder="Search for cities" />
         </div>
@@ -35,7 +35,7 @@ const WeatherPage = () => {
             </div>
           </div>
 
-          <div className="forecast-card today-forecast">
+          <div className="forecast-card today-forecast glass-card">
             <h3>TODAY'S FORECAST</h3>
             <div className="hourly-list">
               {[
@@ -55,7 +55,7 @@ const WeatherPage = () => {
             </div>
           </div>
 
-          <div className="forecast-card air-conditions">
+          <div className="forecast-card air-conditions glass-card">
             <div className="card-header">
               <h3>AIR CONDITIONS</h3>
               <button className="see-more">See more</button>
@@ -94,7 +94,7 @@ const WeatherPage = () => {
         </div>
 
         <div className="side-forecast-section">
-          <div className="forecast-card weekly-forecast">
+          <div className="forecast-card weekly-forecast glass-card">
             <h3>7-DAY FORECAST</h3>
             <div className="weekly-list">
               {[

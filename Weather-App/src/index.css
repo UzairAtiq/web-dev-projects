@@ -1,14 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 
 :root {
+  /* Dark Theme (Default) */
   --bg-color: #0B131E;
-  --card-bg: #202B3B;
-  --sidebar-bg: #202B3B;
+  --card-bg: rgba(32, 43, 59, 0.6);
+  --sidebar-bg: rgba(32, 43, 59, 0.8);
   --text-primary: #FFFFFF;
   --text-secondary: #9399A2;
   --accent-blue: #0095FF;
   --accent-yellow: #FFD600;
-  --border-color: rgba(255, 255, 255, 0.05);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --glass-blur: blur(12px);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='light'] {
+  --bg-color: #F0F4F8;
+  --card-bg: rgba(255, 255, 255, 0.6);
+  --sidebar-bg: rgba(230, 235, 241, 0.8);
+  --text-primary: #1A202C;
+  --text-secondary: #718096;
+  --border-color: rgba(0, 0, 0, 0.05);
+  --glass-border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 * {
@@ -16,12 +29,22 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Outfit', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 body {
   background-color: var(--bg-color);
   color: var(--text-primary);
   overflow-x: hidden;
+  min-height: 100vh;
+}
+
+.glass-card {
+  background: var(--card-bg) !important;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--glass-border) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.18);
 }
 
 button {

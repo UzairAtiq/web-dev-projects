@@ -11,7 +11,7 @@ const LandingPage = () => {
     <div className="landing-container">
       <div className="landing-content">
         <motion.div 
-          className="landing-card"
+          className="landing-card glass-card"
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}

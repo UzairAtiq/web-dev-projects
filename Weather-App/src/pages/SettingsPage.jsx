@@ -26,7 +26,7 @@ const SettingsPage = () => {
   return (
     <div className="settings-page fade-in">
       <div className="search-container">
-        <div className="search-bar">
+        <div className="search-bar glass-card">
           <Search size={18} className="search-icon" />
           <input type="text" placeholder="Search for cities" />
         </div>
@@ -36,7 +36,7 @@ const SettingsPage = () => {
         <div className="settings-main">
           <section className="settings-section">
             <h3>Units</h3>
-            <div className="unit-card">
+            <div className="unit-card glass-card">
               {renderUnitRow('TEMPERATURE', 'temperature', ['Celsius', 'Fahrenheit'])}
               {renderUnitRow('WIND SPEED', 'windSpeed', ['km/h', 'm/s', 'Knots'])}
               {renderUnitRow('PRESSURE', 'pressure', ['hPa', 'Inches', 'kPa', 'mm'])}
@@ -47,7 +47,7 @@ const SettingsPage = () => {
 
           <section className="settings-section">
             <h3>Notifications</h3>
-            <div className="unit-card">
+            <div className="unit-card glass-card">
               <div className="notification-row">
                 <div className="notif-text">
                   <span>Notifications</span>
@@ -63,7 +63,7 @@ const SettingsPage = () => {
 
           <section className="settings-section">
             <h3>General</h3>
-            <div className="unit-card">
+            <div className="unit-card glass-card">
               <div className="general-row">
                 <span>Language</span>
                 <div className="select-value">English <ChevronRight size={16} /></div>
@@ -73,7 +73,7 @@ const SettingsPage = () => {
         </div>
 
         <div className="settings-sidebar">
-          <div className="advanced-card">
+          <div className="advanced-card glass-card">
             <h2>Advanced</h2>
             <h3>Get new experience</h3>
             <ul>
@@ -86,7 +86,7 @@ const SettingsPage = () => {
             </div>
           </div>
 
-          <div className="umbrella-card">
+          <div className="umbrella-card glass-card">
             <h3>Never forget your umbrella!</h3>
             <p>Sign up for our daily weather newsletter personalized just for you.</p>
             <button className="signup-btn">Sign up</button>

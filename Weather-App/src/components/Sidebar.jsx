@@ -6,7 +6,7 @@ import './Sidebar.css';
 
 const Sidebar = () => {
   return (
-    <aside className="sidebar">
+    <aside className="sidebar glass-card">
       <div className="sidebar-logo">
         <img src={umbrellaImg} alt="Logo" />
       </div>

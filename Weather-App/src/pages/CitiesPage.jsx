@@ -27,7 +27,7 @@ const CitiesPage = () => {
   return (
     <div className="cities-page fade-in">
       <div className="search-container">
-        <div className="search-bar">
+        <div className="search-bar glass-card">
           <Search size={18} className="search-icon" />
           <input 
             type="text" 
@@ -43,7 +43,7 @@ const CitiesPage = () => {
           {filteredCities.map((city, index) => (
             <div 
               key={index} 
-              className={`city-card ${selectedCity === city.name ? 'active' : ''}`}
+              className={`city-card glass-card ${selectedCity === city.name ? 'active' : ''}`}
               onClick={() => setSelectedCity(city.name)}
             >
               <div className="city-card-left">
