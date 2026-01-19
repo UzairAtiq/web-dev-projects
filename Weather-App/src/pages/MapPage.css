@@ -137,7 +137,35 @@
   font-size: 0.8rem;
 }
 
-.m-city-temp {
-  font-size: 1.5rem;
-  font-weight: 700;
+@media (max-width: 1024px) {
+  .map-layout {
+    grid-template-columns: 1fr;
+  }
+  .map-view-container {
+    height: 500px;
+  }
+}
+
+@media (max-width: 600px) {
+  .map-page {
+    padding-bottom: 80px;
+  }
+  .marker-content {
+    padding: 10px;
+    min-width: 80px;
+  }
+  .marker-content h4 {
+    font-size: 0.75rem;
+  }
+  .marker-temp {
+    font-size: 0.9rem;
+  }
+  .see-detail-btn {
+    padding: 2px 8px;
+    font-size: 0.6rem;
+  }
+  .done-btn {
+    padding: 6px 15px;
+    font-size: 0.7rem;
+  }
 }

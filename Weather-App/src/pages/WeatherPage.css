@@ -207,6 +207,40 @@
   font-weight: 600;
 }
 
-.day-temp .low {
-  color: var(--text-secondary);
+@media (max-width: 1024px) {
+  .weather-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .city-info h1 {
+    font-size: 2.5rem;
+  }
+  .temperature {
+    font-size: 4rem;
+  }
+  .weather-icon-large svg {
+    width: 100px;
+    height: 100px;
+  }
+  .current-weather {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .weather-page {
+    padding-bottom: 80px; /* Space for fixed sidebar */
+  }
+  .search-bar {
+    max-width: 100%;
+  }
+  .conditions-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .hourly-item {
+    min-width: 70px;
+  }
 }

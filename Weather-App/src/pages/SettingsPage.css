@@ -196,12 +196,24 @@
   margin-bottom: 30px;
 }
 
-.signup-btn {
-  background-color: var(--accent-blue);
-  color: white;
-  width: 100%;
-  padding: 15px;
-  border-radius: 30px;
-  font-weight: 600;
-  font-size: 1rem;
+@media (max-width: 1024px) {
+  .settings-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .settings-page {
+    padding-bottom: 80px;
+  }
+  .unit-card {
+    padding: 15px;
+  }
+  .toggle-group button {
+    padding: 6px;
+    font-size: 0.75rem;
+  }
+  .advanced-card h2 {
+    font-size: 1.8rem;
+  }
 }

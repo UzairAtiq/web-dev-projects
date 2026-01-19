@@ -135,8 +135,31 @@
   align-items: center;
 }
 
-.day-status-small {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+@media (max-width: 1024px) {
+  .cities-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  .cities-page {
+    padding-bottom: 80px;
+  }
+  .city-card {
+    padding: 20px;
+  }
+  .city-name-info h3 {
+    font-size: 1.2rem;
+  }
+  .city-temp {
+    font-size: 1.5rem;
+  }
+  .detail-temp {
+    font-size: 3rem;
+  }
+  .city-detail-header svg {
+    width: 80px;
+    height: 80px;
+  }
 }
