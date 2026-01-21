@@ -1,19 +1,19 @@
 # Breeze - Weather App
 
-"Finally, an app that tells you it's raining while you're literally getting wet. 🌧️"
-"So aesthetic, you'll check the temperature even when you're staying in all day. ✨"
+"Finally, an app that tells you it's raining while you're literally getting wet."
+"So aesthetic, you'll check the temperature even when you're staying in all day."
 
-## 🚀 Quick Start
+## Quick Start
 
 Choose how you want to experience Breeze:
 
-### 🌐 Live Demo
+### Live Demo
 Visit the production site directly:  
 [**weather-app-1-navy-iota.vercel.app**](https://weather-app-1-navy-iota.vercel.app)
 
 ---
 
-### 💻 Run Locally
+### Run Locally
 Follow these steps to get the project running on your machine:
 
 1. **Clone the repository**:
@@ -37,19 +37,20 @@ Follow these steps to get the project running on your machine:
    npm run build
    ```
 
-## ✨ Features
+## Features
 - **Real-time Updates**: Live weather data at your fingertips.
 - **Glassmorphism UI**: A sleek, modern design that's easy on the eyes.
 - **Interactive Maps**: Visualize weather patterns with ease.
 - **Multiple Cities**: Track weather across your favorite locations.
 - **Theme Toggle**: Seamlessly switch between light and dark modes.
 
-## 🛠️ Technologies Used
+## Technologies Used
 - React & Vite
 - Framer Motion (animations)
 - Lucide React (icons)
 - React Router (navigation)
 - Leaflet (maps)
+
 
 
 
