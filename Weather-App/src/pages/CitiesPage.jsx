@@ -2,16 +2,13 @@ import React, { useState } from 'react';
 import './CitiesPage.css';
 import { Search, Sun, Cloud, Thermometer, Wind, Eye, Droplets, MapPin } from 'lucide-react';
 import { useWeather } from '../context/WeatherContext';
+import { citiesData } from '../data/cities';
 
 const CitiesPage = () => {
   const { selectedCity, setSelectedCity, units } = useWeather();
   const [searchTerm, setSearchTerm] = useState('');
 
-  const cities = [
-    { name: 'Madrid', country: 'Spain', temp: '31', time: '10:23', icon: <Sun color="var(--accent-yellow)" /> },
-    { name: 'Vienna', country: 'Austria', temp: '27', time: '11:23', icon: <Cloud /> },
-    { name: 'Athens', country: 'Greece', temp: '33', time: '12:23', icon: <Sun color="var(--accent-yellow)" /> },
-  ];
+  const cities = citiesData;
 
   const filteredCities = cities.filter(city => 
     city.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -35,6 +32,7 @@ const CitiesPage = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
+          <button className="clear-btn" onClick={() => setSearchTerm('')}>Clear</button>
         </div>
       </div>
 
