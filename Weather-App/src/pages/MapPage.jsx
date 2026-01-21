@@ -22,13 +22,6 @@ const MapPage = () => {
 
   return (
     <div className="map-page fade-in">
-      <div className="search-container">
-        <div className="search-bar glass-card">
-          <Search size={18} className="search-icon" />
-          <input type="text" placeholder="Spain" />
-        </div>
-      </div>
-
       <div className="map-layout">
         <div className="map-view-container">
           <div className="map-visual">
