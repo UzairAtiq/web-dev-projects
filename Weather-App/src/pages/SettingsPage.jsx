@@ -25,13 +25,6 @@ const SettingsPage = () => {
 
   return (
     <div className="settings-page fade-in">
-      <div className="search-container">
-        <div className="search-bar glass-card">
-          <Search size={18} className="search-icon" />
-          <input type="text" placeholder="Search for cities" />
-        </div>
-      </div>
-
       <div className="settings-layout">
         <div className="settings-main">
           <section className="settings-section">
