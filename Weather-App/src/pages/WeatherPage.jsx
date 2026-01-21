@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './WeatherPage.css';
 import { Search, Sun, Cloud, CloudRain, Wind, Droplets, Thermometer, SunDim } from 'lucide-react';
 import { useWeather } from '../context/WeatherContext';
+import { motion } from 'framer-motion';
 
 const WeatherPage = () => {
   const { units, selectedCity } = useWeather();
-  
+  const [showMore, setShowMore] = useState(false);
+
   const convertTemp = (temp) => {
     if (units.temperature === 'Fahrenheit') {
       return Math.round((temp * 9/5) + 32);
@@ -58,38 +60,47 @@ const WeatherPage = () => {
           <div className="forecast-card air-conditions glass-card">
             <div className="card-header">
               <h3>AIR CONDITIONS</h3>
-              <button className="see-more">See more</button>
+              <button className="see-more" onClick={() => setShowMore(prev => !prev)}>{showMore ? 'See less' : 'See more'}</button>
             </div>
-            <div className="conditions-grid">
-              <div className="condition-item">
-                <Thermometer size={20} className="cond-icon" />
-                <div className="cond-content">
-                  <p>Real Feel</p>
-                  <h4>{convertTemp(30)}°</h4>
-                </div>
-              </div>
-              <div className="condition-item">
-                <Wind size={20} className="cond-icon" />
-                <div className="cond-content">
-                  <p>Wind</p>
-                  <h4>{units.windSpeed === 'km/h' ? '0.2 km/h' : units.windSpeed === 'm/s' ? '0.05 m/s' : '0.1 knots'}</h4>
-                </div>
-              </div>
-              <div className="condition-item">
-                <Droplets size={20} className="cond-icon" />
-                <div className="cond-content">
-                  <p>Chance of rain</p>
-                  <h4>0%</h4>
-                </div>
-              </div>
-              <div className="condition-item">
-                <SunDim size={20} className="cond-icon" />
-                <div className="cond-content">
-                  <p>UV Index</p>
-                  <h4>3</h4>
-                </div>
-              </div>
-            </div>
+            {showMore && (
+  <motion.div
+    className="conditions-grid"
+    layout
+    initial={{ opacity: 0, height: 0 }}
+    animate={{ opacity: 1, height: 'auto' }}
+    exit={{ opacity: 0, height: 0 }}
+    transition={{ duration: 0.3 }}
+  >
+    <div className="condition-item">
+      <Thermometer size={20} className="cond-icon" />
+      <div className="cond-content">
+        <p>Real Feel</p>
+        <h4>{convertTemp(30)}°</h4>
+      </div>
+    </div>
+    <div className="condition-item">
+      <Wind size={20} className="cond-icon" />
+      <div className="cond-content">
+        <p>Wind</p>
+        <h4>{units.windSpeed === 'km/h' ? '0.2 km/h' : units.windSpeed === 'm/s' ? '0.05 m/s' : '0.1 knots'}</h4>
+      </div>
+    </div>
+    <div className="condition-item">
+      <Droplets size={20} className="cond-icon" />
+      <div className="cond-content">
+        <p>Chance of rain</p>
+        <h4>0%</h4>
+      </div>
+    </div>
+    <div className="condition-item">
+      <SunDim size={20} className="cond-icon" />
+      <div className="cond-content">
+        <p>UV Index</p>
+        <h4>3</h4>
+      </div>
+    </div>
+  </motion.div>
+)}
           </div>
         </div>
 
