@@ -17,13 +17,6 @@ const WeatherPage = () => {
 
   return (
     <div className="weather-page fade-in">
-      <div className="search-container">
-        <div className="search-bar glass-card">
-          <Search size={18} className="search-icon" />
-          <input type="text" placeholder="Search for cities" />
-        </div>
-      </div>
-
       <div className="weather-layout">
         <div className="main-weather-section">
           <div className="current-weather">
