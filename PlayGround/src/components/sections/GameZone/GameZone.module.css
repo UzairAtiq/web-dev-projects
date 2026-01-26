@@ -1,0 +1,116 @@
+/* Game Zone Section - Section 4 */
+.section {
+  composes: section from '../shared/SectionBase.module.css';
+  background: linear-gradient(
+    180deg,
+    var(--color-background) 0%,
+    rgba(245, 158, 11, 0.05) 50%,
+    var(--color-background) 100%
+  );
+}
+
+.decoration1 {
+  composes: bgDecoration from '../shared/SectionBase.module.css';
+  width: 500px;
+  height: 500px;
+  background: var(--color-warning);
+  top: -100px;
+  left: -150px;
+}
+
+.decoration2 {
+  composes: bgDecoration from '../shared/SectionBase.module.css';
+  width: 350px;
+  height: 350px;
+  background: var(--color-secondary);
+  bottom: -50px;
+  right: -100px;
+}
+
+/* Game controller display */
+.gameShowcase {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-2xl);
+}
+
+.gameCard {
+  width: 150px;
+  height: 180px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.gameCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.gameCard:hover::before {
+  left: 100%;
+}
+
+.gameCard:hover {
+  background: rgba(245, 158, 11, 0.1);
+  border-color: var(--color-warning);
+  transform: translateY(-8px);
+}
+
+.gameIcon {
+  font-size: 3rem;
+}
+
+.gameTitle {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text);
+}
+
+.gameStatus {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+/* Pixel art decoration */
+.pixelGrid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 2px;
+  margin-top: var(--spacing-xl);
+}
+
+.pixel {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  animation: pixelPulse 2s ease-in-out infinite;
+  animation-delay: var(--delay);
+}
+
+@keyframes pixelPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}

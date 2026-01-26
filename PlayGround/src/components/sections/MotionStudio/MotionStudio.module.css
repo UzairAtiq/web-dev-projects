@@ -1,0 +1,87 @@
+/* Motion Studio Section - Section 2 */
+.section {
+  composes: section from '../shared/SectionBase.module.css';
+  background: linear-gradient(
+    180deg,
+    var(--color-background) 0%,
+    rgba(236, 72, 153, 0.05) 50%,
+    var(--color-background) 100%
+  );
+}
+
+.decoration1 {
+  composes: bgDecoration from '../shared/SectionBase.module.css';
+  width: 500px;
+  height: 500px;
+  background: var(--color-secondary);
+  top: 10%;
+  left: -150px;
+}
+
+.decoration2 {
+  composes: bgDecoration from '../shared/SectionBase.module.css';
+  width: 350px;
+  height: 350px;
+  background: var(--color-primary);
+  bottom: 10%;
+  right: -100px;
+}
+
+/* Animation showcase */
+.animationShowcase {
+  display: flex;
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-2xl);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.animBox {
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(135deg, #ec4899 0%, #f472b6 100%);
+  border-radius: var(--radius-xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+}
+
+.boxBounce {
+  animation: bounceAnim 2s ease-in-out infinite;
+}
+
+.boxRotate {
+  animation: rotateAnim 3s linear infinite;
+}
+
+.boxPulse {
+  animation: pulseAnim 2s ease-in-out infinite;
+}
+
+.boxFloat {
+  animation: floatAnim 3s ease-in-out infinite;
+}
+
+@keyframes bounceAnim {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-30px); }
+}
+
+@keyframes rotateAnim {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulseAnim {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+@keyframes floatAnim {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-15px) rotate(5deg); }
+  75% { transform: translateY(-15px) rotate(-5deg); }
+}

@@ -1,0 +1,94 @@
+/* Sound Waves Section - Section 3 */
+.section {
+  composes: section from '../shared/SectionBase.module.css';
+  background: linear-gradient(
+    180deg,
+    var(--color-background) 0%,
+    rgba(20, 184, 166, 0.05) 50%,
+    var(--color-background) 100%
+  );
+}
+
+.decoration1 {
+  composes: bgDecoration from '../shared/SectionBase.module.css';
+  width: 450px;
+  height: 450px;
+  background: var(--color-accent);
+  top: 20%;
+  right: -100px;
+}
+
+.decoration2 {
+  composes: bgDecoration from '../shared/SectionBase.module.css';
+  width: 300px;
+  height: 300px;
+  background: var(--color-primary);
+  bottom: 20%;
+  left: -80px;
+}
+
+/* Audio visualizer bars */
+.visualizer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 8px;
+  height: 150px;
+  margin-top: var(--spacing-2xl);
+}
+
+.bar {
+  width: 20px;
+  background: linear-gradient(180deg, #14b8a6 0%, #2dd4bf 100%);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  animation: barAnim var(--duration) ease-in-out infinite;
+}
+
+.bar:nth-child(1) { --duration: 0.8s; }
+.bar:nth-child(2) { --duration: 0.6s; animation-delay: 0.1s; }
+.bar:nth-child(3) { --duration: 0.9s; animation-delay: 0.2s; }
+.bar:nth-child(4) { --duration: 0.5s; animation-delay: 0.1s; }
+.bar:nth-child(5) { --duration: 0.7s; animation-delay: 0.3s; }
+.bar:nth-child(6) { --duration: 0.6s; animation-delay: 0.2s; }
+.bar:nth-child(7) { --duration: 0.8s; animation-delay: 0.1s; }
+.bar:nth-child(8) { --duration: 0.5s; }
+.bar:nth-child(9) { --duration: 0.7s; animation-delay: 0.2s; }
+.bar:nth-child(10) { --duration: 0.9s; animation-delay: 0.1s; }
+
+@keyframes barAnim {
+  0%, 100% { height: 30px; }
+  50% { height: 120px; }
+}
+
+/* Music notes floating */
+.musicNotes {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.note {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0.3;
+  animation: floatNote 8s linear infinite;
+}
+
+@keyframes floatNote {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.3;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(360deg);
+    opacity: 0;
+  }
+}

@@ -1,0 +1,61 @@
+/* Creative Lab Section - Section 1 */
+.section {
+  composes: section from '../shared/SectionBase.module.css';
+  background: linear-gradient(
+    180deg,
+    var(--color-background) 0%,
+    rgba(99, 102, 241, 0.05) 50%,
+    var(--color-background) 100%
+  );
+}
+
+.decoration1 {
+  composes: bgDecoration from '../shared/SectionBase.module.css';
+  width: 600px;
+  height: 600px;
+  background: var(--color-primary);
+  top: -200px;
+  right: -200px;
+}
+
+.decoration2 {
+  composes: bgDecoration from '../shared/SectionBase.module.css';
+  width: 400px;
+  height: 400px;
+  background: var(--color-secondary);
+  bottom: -100px;
+  left: -100px;
+}
+
+/* Showcase area */
+.showcase {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-2xl);
+}
+
+.showcaseItem {
+  aspect-ratio: 1;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.showcaseItem:hover {
+  background: rgba(99, 102, 241, 0.1);
+  border-color: var(--color-primary);
+  transform: scale(1.05) rotate(2deg);
+}
+
+@media (max-width: 768px) {
+  .showcase {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
