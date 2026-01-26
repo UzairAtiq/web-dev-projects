@@ -45,6 +45,7 @@ npm run preview
 src/
 ├── animations/          # Framer Motion variants & transitions
 ├── components/
+│   ├── common/          # Button, Card, Tooltip, Loader, Footer
 │   ├── navigation/      # Navbar, Sidebar
 │   └── sections/        # Hero + 5 playground sections
 ├── context/            # React Context providers
@@ -52,7 +53,7 @@ src/
 ├── hooks/              # Custom React hooks
 ├── layouts/            # MainLayout wrapper
 ├── styles/             # Global CSS, variables, typography
-└── utils/              # Helper functions, storage
+└── utils/              # Helper functions, storage, a11y
 ```
 
 ---
@@ -66,6 +67,36 @@ src/
 | 🎵 Sound Waves | Audio visualizations | Teal |
 | 🎮 Game Zone | Mini-games & interactive toys | Orange |
 | 💻 Code Vault | Code snippets & dev tools | Violet |
+
+---
+
+## 🧩 Components
+
+### Common Components
+- **Button** - Multiple variants (primary, secondary, ghost, outline), sizes, and loading state
+- **Card** - Flexible card container with CardHeader, CardBody, CardFooter subcomponents
+- **Tooltip** - Animated hover tooltips with position options (top, bottom, left, right)
+- **Loader** - Full-screen loading animation with dots variant
+- **Footer** - Site footer with navigation and scroll-to-top
+- **SkipLink** - Accessibility skip navigation link
+
+### Custom Hooks
+- `useScrollPosition` - Track scroll position with throttling
+- `useFavorites` - Manage favorite sections
+- `useLocalStorage` - Persist state to localStorage
+- `useMediaQuery` - Responsive media query matching
+- `useKeyPress` - Keyboard event handling with modifier support
+
+---
+
+## ♿ Accessibility
+
+- Skip to main content link for keyboard navigation
+- Focus trap utilities for modals
+- Screen reader announcements
+- Reduced motion support
+- Semantic HTML structure
+- ARIA attributes on interactive elements
 
 ---
 
@@ -101,9 +132,8 @@ See [Contributing Guidelines](./docs/CONTRIBUTING.md) for details.
 
 ## 📜 License
 
-MIT © 2026
+MIT © 2025
 
 ---
 
 Made with ♥ for fun
-# PlayGround
