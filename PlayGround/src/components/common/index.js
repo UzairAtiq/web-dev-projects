@@ -13,3 +13,4 @@ export {
 } from './Card';
 export { Footer } from './Footer';
 export { Loader, LoaderDots } from './Loader';
+export { Tooltip } from './Tooltip';
