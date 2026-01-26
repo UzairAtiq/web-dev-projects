@@ -1,16 +1,108 @@
-# React + Vite
+# 🎮 Playground Fun
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> A premium personal playground for experiments, creativity, and fun.
 
-Currently, two official plugins are available:
+![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react)
+![Vite](https://img.shields.io/badge/Vite-7-646CFF?style=flat-square&logo=vite)
+![Framer Motion](https://img.shields.io/badge/Framer%20Motion-11-FF0055?style=flat-square&logo=framer)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 🎨 **Beautiful Animations** - Smooth, purposeful animations powered by Framer Motion
+- 🧭 **Animated Sidebar** - Sleek slide-out navigation with micro-interactions
+- ⭐ **Favorites System** - Pin up to 5 sections to the navbar for quick access
+- 🌟 **Inspirational Quotes** - Random anime quotes that refresh on every visit
+- 📱 **Responsive Design** - Works beautifully on desktop, tablet, and mobile
+- 🎯 **Section-based Layout** - Full-viewport sections for immersive experience
+- 🔮 **Glass Morphism** - Modern glass-effect UI elements
+- 🌈 **Gradient Orbs** - Animated background decorations
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🚀 Quick Start
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+---
+
+## 📁 Project Structure
+
+```
+src/
+├── animations/          # Framer Motion variants & transitions
+├── components/
+│   ├── navigation/      # Navbar, Sidebar
+│   └── sections/        # Hero + 5 playground sections
+├── context/            # React Context providers
+├── data/               # Quotes, sections config
+├── hooks/              # Custom React hooks
+├── layouts/            # MainLayout wrapper
+├── styles/             # Global CSS, variables, typography
+└── utils/              # Helper functions, storage
+```
+
+---
+
+## 🎬 Sections
+
+| Section | Description | Color |
+|---------|-------------|-------|
+| 🎨 Creative Lab | Generative art & creative coding | Purple |
+| 🎬 Motion Studio | Animation experiments | Pink |
+| 🎵 Sound Waves | Audio visualizations | Teal |
+| 🎮 Game Zone | Mini-games & interactive toys | Orange |
+| 💻 Code Vault | Code snippets & dev tools | Violet |
+
+---
+
+## 🛠️ Tech Stack
+
+- **React 19** - UI framework
+- **Vite 7** - Build tool & dev server
+- **Framer Motion** - Animation library
+- **CSS Modules** - Scoped styling
+- **CSS Variables** - Design tokens
+
+---
+
+## 📖 Documentation
+
+- [Architecture Guide](./docs/ARCHITECTURE.md)
+- [Contributing Guidelines](./docs/CONTRIBUTING.md)
+- [UI Diagrams](./docs/UI-DIAGRAMS.md)
+
+---
+
+## 🎯 Adding New Sections
+
+1. Create folder in `src/components/sections/YourSection/`
+2. Add `YourSection.jsx`, `YourSection.module.css`, `index.js`
+3. Register in `src/data/sections.js`
+4. Export from `src/components/sections/index.js`
+5. Add to `App.jsx`
+
+See [Contributing Guidelines](./docs/CONTRIBUTING.md) for details.
+
+---
+
+## 📜 License
+
+MIT © 2026
+
+---
+
+Made with ♥ for fun
