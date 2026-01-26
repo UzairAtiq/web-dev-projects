@@ -8,6 +8,7 @@ import {
   GameZone,
   CodeVault,
 } from './components/sections';
+import { Footer } from './components/common';
 import './styles/globals.css';
 
 /**
@@ -28,6 +29,9 @@ function App() {
           <SoundWaves />
           <GameZone />
           <CodeVault />
+          
+          {/* Footer */}
+          <Footer />
         </MainLayout>
       </SidebarProvider>
     </FavoritesProvider>
