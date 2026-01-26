@@ -4,3 +4,4 @@
 
 export * from './storage';
 export * from './helpers';
+export * from './a11y';

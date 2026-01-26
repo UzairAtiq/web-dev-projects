@@ -13,4 +13,5 @@ export {
 } from './Card';
 export { Footer } from './Footer';
 export { Loader, LoaderDots } from './Loader';
+export { SkipLink } from './SkipLink';
 export { Tooltip } from './Tooltip';
