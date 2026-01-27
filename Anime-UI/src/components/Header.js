@@ -1,7 +1,8 @@
 import React from 'react';
 import './Header.css';
+import ProfileUpload from './ProfileUpload';
 
-const Header = () => {
+const Header = ({ profileImage, setProfileImage }) => {
   return (
     <header className="header">
       <div className="logo">Anime UI</div>
@@ -18,10 +19,7 @@ const Header = () => {
           </svg>
         </button>
         <div className="user-profile">
-          <span>Hi,Liza</span>
-          <div className="avatar">
-            <img src="https://i.pravatar.cc/150?img=5" alt="User" />
-          </div>
+          <ProfileUpload profileImage={profileImage} setProfileImage={setProfileImage} />
         </div>
       </div>
     </header>

@@ -9,6 +9,7 @@ import Quote from './components/Quote';
 
 function App() {
   const [activeSection, setActiveSection] = useState('home');
+  const [profileImage, setProfileImage] = useState(null);
 
   const renderSection = () => {
     switch(activeSection) {
@@ -27,7 +28,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+      <Header profileImage={profileImage} setProfileImage={setProfileImage} />
       <Sidebar activeSection={activeSection} setActiveSection={setActiveSection} />
       {renderSection()}
     </div>
