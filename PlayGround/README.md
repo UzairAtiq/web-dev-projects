@@ -1,23 +1,28 @@
 # 🎮 Playground Fun
 
-> A premium personal playground for experiments, creativity, and fun.
+> A premium personal playground featuring media galleries, games, and creative experiments.
 
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react)
 ![Vite](https://img.shields.io/badge/Vite-7-646CFF?style=flat-square&logo=vite)
-![Framer Motion](https://img.shields.io/badge/Framer%20Motion-11-FF0055?style=flat-square&logo=framer)
+![Framer Motion](https://img.shields.io/badge/Framer%20Motion-12-FF0055?style=flat-square&logo=framer)
 
 ---
 
 ## ✨ Features
 
-- 🎨 **Beautiful Animations** - Smooth, purposeful animations powered by Framer Motion
-- 🧭 **Animated Sidebar** - Sleek slide-out navigation with micro-interactions
-- ⭐ **Favorites System** - Pin up to 5 sections to the navbar for quick access
-- 🌟 **Inspirational Quotes** - Random anime quotes that refresh on every visit
-- 📱 **Responsive Design** - Works beautifully on desktop, tablet, and mobile
-- 🎯 **Section-based Layout** - Full-viewport sections for immersive experience
-- 🔮 **Glass Morphism** - Modern glass-effect UI elements
-- 🌈 **Gradient Orbs** - Animated background decorations
+### 🎨 Media & Entertainment
+- 🖼️ **Picture Gallery** - Stunning image display with modern frames and modal view
+- 🎬 **Video Studio** - Video player with playlist and hover preview functionality
+- 🎵 **Music Player** - Audio player with real-time visualizer and playlist management
+- 🎮 **Game Zone** - Interactive games (Number Guessing, Tic Tac Toe) with beautiful animations
+
+### 🔧 Technical Features
+- ⚡ **Collapsible Sections** - All sections load collapsed with smooth expand/collapse animations
+- 🌐 **Google Drive Integration** - Dynamic file loading from your Google Drive folders
+- 🎯 **Beautiful Animations** - Enhanced Framer Motion animations throughout
+- 📱 **Fully Responsive** - Optimized for all screen sizes
+- ⭐ **Favorites System** - Pin your favorite sections for quick access
+- 🎨 **Modern UI** - Glass morphism, gradients, and sleek design
 
 ---
 
@@ -43,30 +48,65 @@ npm run preview
 
 ```
 src/
-├── animations/          # Framer Motion variants & transitions
+├── animations/          # Framer Motion variants & enhanced transitions
 ├── components/
-│   ├── common/          # Button, Card, Tooltip, Loader, Footer
+│   ├── common/          # Button, Card, Tooltip, Loader, Footer, CollapsibleSection
 │   ├── navigation/      # Navbar, Sidebar
-│   └── sections/        # Hero + 5 playground sections
+│   └── sections/        # All playground sections
+│       ├── PictureGallery/
+│       ├── VideoStudio/
+│       ├── MusicPlayer/
+│       ├── GameZone/
+│       │   └── games/   # Individual game components
+│       └── GoonSection/
 ├── context/            # React Context providers
 ├── data/               # Quotes, sections config
 ├── hooks/              # Custom React hooks
 ├── layouts/            # MainLayout wrapper
-├── styles/             # Global CSS, variables, typography
-└── utils/              # Helper functions, storage, a11y
+├── styles/             # Global CSS, variables, typography, sections
+└── utils/              # Helper functions, storage, a11y, googleDrive
 ```
 
 ---
 
 ## 🎬 Sections
 
-| Section | Description | Color |
-|---------|-------------|-------|
-| 🎨 Creative Lab | Generative art & creative coding | Purple |
-| 🎬 Motion Studio | Animation experiments | Pink |
-| 🎵 Sound Waves | Audio visualizations | Teal |
-| 🎮 Game Zone | Mini-games & interactive toys | Orange |
-| 💻 Code Vault | Code snippets & dev tools | Violet |
+| Section | Description | Features |
+|---------|-------------|----------|
+| 🖼️ Picture Gallery | Beautiful image display | Modern frames, modal view, grid layout |
+| 🎬 Video Studio | Video player & playlist | Hover preview, playback controls |
+| 🎵 Music Player | Audio with visualizer | Real-time visualizer, playlist, controls |
+| 🎮 Game Zone | Interactive games | Number Guessing, Tic Tac Toe |
+| 🚀 Goon Section | Coming soon | Placeholder with animations |
+
+---
+
+## 🎮 Games
+
+### Number Guessing Game
+- Guess numbers between 1-100
+- Temperature hints (🥶 too low, 🥵 too high, 🔥 close)
+- Attempt tracking and history
+- Responsive design with smooth animations
+
+### Tic Tac Toe
+- Classic gameplay with modern UI
+- Score tracking (X wins, O wins, Draws)
+- Winning line highlight
+- Smooth animations for all interactions
+
+---
+
+## 🌐 Google Drive Integration
+
+Connect your Google Drive to dynamically load images, videos, and music:
+
+1. Set up Google Cloud Project and enable Drive API
+2. Create API key and restrict to Drive API
+3. Share your Drive folders publicly
+4. Update configuration in `src/utils/googleDrive.js`
+
+See [Google Drive Setup Guide](./docs/GOOGLE_DRIVE_SETUP.md) for detailed instructions.
 
 ---
 
@@ -79,6 +119,7 @@ src/
 - **Loader** - Full-screen loading animation with dots variant
 - **Footer** - Site footer with navigation and scroll-to-top
 - **SkipLink** - Accessibility skip navigation link
+- **CollapsibleSection** - Wrapper for collapsible content with smooth animations
 
 ### Custom Hooks
 - `useScrollPosition` - Track scroll position with throttling
@@ -97,6 +138,7 @@ src/
 - Reduced motion support
 - Semantic HTML structure
 - ARIA attributes on interactive elements
+- Keyboard navigation for all games and sections
 
 ---
 
@@ -104,9 +146,10 @@ src/
 
 - **React 19** - UI framework
 - **Vite 7** - Build tool & dev server
-- **Framer Motion** - Animation library
+- **Framer Motion 12** - Animation library
 - **CSS Modules** - Scoped styling
 - **CSS Variables** - Design tokens
+- **Google Drive API** - Dynamic file loading (optional)
 
 ---
 
@@ -115,6 +158,7 @@ src/
 - [Architecture Guide](./docs/ARCHITECTURE.md)
 - [Contributing Guidelines](./docs/CONTRIBUTING.md)
 - [UI Diagrams](./docs/UI-DIAGRAMS.md)
+- [Google Drive Setup](./docs/GOOGLE_DRIVE_SETUP.md)
 
 ---
 
@@ -124,7 +168,7 @@ src/
 2. Add `YourSection.jsx`, `YourSection.module.css`, `index.js`
 3. Register in `src/data/sections.js`
 4. Export from `src/components/sections/index.js`
-5. Add to `App.jsx`
+5. Wrap in `CollapsibleSection` in `App.jsx`
 
 See [Contributing Guidelines](./docs/CONTRIBUTING.md) for details.
 
