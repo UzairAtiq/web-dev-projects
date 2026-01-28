@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import styles from './MusicPlayer.module.css';
+import { DRIVE_CONFIG, fetchDriveFolder, parseFileMetadata } from '../../../utils/googleDrive';
 
 /**
  * Music Player Section
@@ -20,45 +21,123 @@ const MusicPlayer = () => {
   const dataArrayRef = useRef(null);
   const animationIdRef = useRef(null);
 
-  // Placeholder songs - will be replaced with Google Drive audio
+  // Load songs from Google Drive
   useEffect(() => {
-    const placeholderSongs = [
-      {
-        id: 1,
-        title: 'Ambient Dreams',
-        artist: 'Soundscape',
-        duration: '3:45',
-        url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
-        cover: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop'
-      },
-      {
-        id: 2,
-        title: 'Neon Lights',
-        artist: 'Synthwave',
-        duration: '4:12',
-        url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
-        cover: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop'
-      },
-      {
-        id: 3,
-        title: 'Ocean Breeze',
-        artist: 'Nature Sounds',
-        duration: '5:20',
-        url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
-        cover: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop'
-      },
-      {
-        id: 4,
-        title: 'Digital Pulse',
-        artist: 'Electronic',
-        duration: '3:58',
-        url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3',
-        cover: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop'
-      }
-    ];
+    const loadSongs = async () => {
+      try {
+        const files = await fetchDriveFolder(DRIVE_CONFIG.MUSIC_FOLDER_ID);
+        
+        // Filter for audio files only
+        const audioFiles = files.filter(file => 
+          file.mimeType && file.mimeType.startsWith('audio/')
+        );
 
-    setSongs(placeholderSongs);
-    setCurrentSong(placeholderSongs[0]);
+        if (audioFiles.length > 0) {
+          const formattedSongs = audioFiles.map((file, index) => {
+            const metadata = parseFileMetadata(file);
+            return {
+              id: metadata.id,
+              title: metadata.title,
+              artist: 'Unknown Artist',
+              duration: 'N/A', // Duration not available from Drive API
+              url: metadata.url,
+              cover: metadata.thumbnail || 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop'
+            };
+          });
+          
+          setSongs(formattedSongs);
+          if (formattedSongs.length > 0) {
+            setCurrentSong(formattedSongs[0]);
+          }
+        } else {
+          // Fallback to placeholder songs
+          const placeholderSongs = [
+            {
+              id: 1,
+              title: 'Ambient Dreams',
+              artist: 'Soundscape',
+              duration: '3:45',
+              url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+              cover: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop'
+            },
+            {
+              id: 2,
+              title: 'Neon Lights',
+              artist: 'Synthwave',
+              duration: '4:12',
+              url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
+              cover: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop'
+            },
+            {
+              id: 3,
+              title: 'Ocean Breeze',
+              artist: 'Nature Sounds',
+              duration: '5:20',
+              url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
+              cover: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop'
+            },
+            {
+              id: 4,
+              title: 'Digital Pulse',
+              artist: 'Electronic',
+              duration: '3:58',
+              url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3',
+              cover: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop'
+            }
+          ];
+
+          setSongs(placeholderSongs);
+          if (placeholderSongs.length > 0) {
+            setCurrentSong(placeholderSongs[0]);
+          }
+        }
+      } catch (error) {
+        console.error('Error loading songs from Google Drive:', error);
+        
+        // Fallback to placeholder songs on error
+        const placeholderSongs = [
+          {
+            id: 1,
+            title: 'Ambient Dreams',
+            artist: 'Soundscape',
+            duration: '3:45',
+            url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+            cover: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop'
+          },
+          {
+            id: 2,
+            title: 'Neon Lights',
+            artist: 'Synthwave',
+            duration: '4:12',
+            url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
+            cover: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop'
+          },
+          {
+            id: 3,
+            title: 'Ocean Breeze',
+            artist: 'Nature Sounds',
+            duration: '5:20',
+            url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
+            cover: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop'
+          },
+          {
+            id: 4,
+            title: 'Digital Pulse',
+            artist: 'Electronic',
+            duration: '3:58',
+            url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3',
+            cover: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop'
+          }
+        ];
+
+        setSongs(placeholderSongs);
+        if (placeholderSongs.length > 0) {
+          setCurrentSong(placeholderSongs[0]);
+        }
+      }
+    };
+
+    loadSongs();
   }, []);
 
   // Initialize audio visualizer
