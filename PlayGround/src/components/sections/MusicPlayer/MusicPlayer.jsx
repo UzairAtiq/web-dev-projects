@@ -335,6 +335,21 @@ const MusicPlayer = () => {
     handleSongSelect(songs[prevIndex]);
   };
 
+  if (loading) {
+    return (
+      <div className={styles.player}>
+        <div className={styles.loading}>
+          <motion.div
+            className={styles.loader}
+            animate={{ rotate: 360 }}
+            transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+          />
+          <p>Loading music...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.player}>
       <div className={styles.header}>

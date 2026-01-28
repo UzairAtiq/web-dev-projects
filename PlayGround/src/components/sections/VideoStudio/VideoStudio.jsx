@@ -219,6 +219,19 @@ const VideoStudio = () => {
     })
   };
 
+  if (loading) {
+    return (
+      <div className={styles.loading}>
+        <motion.div
+          className={styles.loader}
+          animate={{ rotate: 360 }}
+          transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+        />
+        <p>Loading videos...</p>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.studio}>
       <div className={styles.header}>
