@@ -56,8 +56,6 @@ const PictureGallery = () => {
           ]);
         }
       } catch (error) {
-        console.error('Error loading images from Drive:', error);
-      } catch (error) {
         console.error('Error loading images from Google Drive:', error);
         // Use placeholder images on error
         setImages([
