@@ -38,6 +38,9 @@ export {
   cardGridStagger 
 } from './variants/stagger';
 
+// Enhanced animations
+export * from './variants/enhanced';
+
 /**
  * Common transition presets
  */
@@ -78,3 +81,4 @@ export const durations = {
   slow: 0.5,
   slower: 0.8,
 };
+
