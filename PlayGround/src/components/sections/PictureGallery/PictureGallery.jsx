@@ -148,6 +148,8 @@ const PictureGallery = () => {
     );
   }
 
+  console.log('Rendering gallery with images:', images);
+
   return (
     <div className={styles.gallery}>
       <div className={styles.header}>
@@ -176,6 +178,11 @@ const PictureGallery = () => {
                 alt={image.title}
                 className={styles.image}
                 loading="lazy"
+                onError={(e) => {
+                  console.error('Image failed to load:', image.url, e);
+                  console.log('Image object:', image);
+                }}
+                onLoad={() => console.log('Image loaded successfully:', image.url)}
               />
               <div className={styles.overlay}>
                 <h3 className={styles.imageTitle}>{image.title}</h3>
