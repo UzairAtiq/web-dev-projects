@@ -1,100 +1,121 @@
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { fadeInUp, staggerContainer, scaleIn } from '../../../animations';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import styles from './GameZone.module.css';
-import baseStyles from '../shared/SectionBase.module.css';
+import NumberGuess from './games/NumberGuess';
+import TicTacToe from './games/TicTacToe';
 
 /**
  * Game Zone Section
- * Mini-games and interactive experiments
+ * Collection of fun web games with beautiful animations
  */
 export const GameZone = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const [selectedGame, setSelectedGame] = useState(null);
 
   const games = [
-    { icon: '🎮', title: 'Arcade', status: 'Coming Soon' },
-    { icon: '🧩', title: 'Puzzles', status: 'Coming Soon' },
-    { icon: '🎯', title: 'Target', status: 'Coming Soon' },
-    { icon: '🏃', title: 'Runner', status: 'Coming Soon' },
+    {
+      id: 'number-guess',
+      title: 'Number Guessing',
+      description: 'Guess the secret number between 1-100',
+      icon: '🎯',
+      color: '#f59e0b',
+      component: NumberGuess
+    },
+    {
+      id: 'tic-tac-toe',
+      title: 'Tic Tac Toe',
+      description: 'Classic game with modern design',
+      icon: '❌⭕',
+      color: '#ef4444',
+      component: TicTacToe
+    }
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        type: 'spring',
+        stiffness: 100,
+        damping: 15
+      }
+    }
+  };
+
   return (
-    <section id="game-zone" className={styles.section} ref={ref}>
-      {/* Background decorations */}
-      <motion.div 
-        className={styles.decoration1}
-        animate={{ rotate: [0, 360] }}
-        transition={{ duration: 60, repeat: Infinity, ease: 'linear' }}
-      />
-      <motion.div 
-        className={styles.decoration2}
-        animate={{ x: [0, 50, 0], y: [0, -30, 0] }}
-        transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut' }}
-      />
+    <div className={styles.gameZone}>
+      <AnimatePresence mode="wait">
+        {!selectedGame ? (
+          <motion.div
+            key="game-selection"
+            initial="hidden"
+            animate="visible"
+            exit={{ opacity: 0, scale: 0.9 }}
+            className={styles.selection}
+          >
+            <div className={styles.header}>
+              <h2 className={styles.title}>Game Zone</h2>
+              <p className={styles.subtitle}>Choose your adventure</p>
+            </div>
 
-      <motion.div 
-        className={baseStyles.sectionContent}
-        variants={staggerContainer}
-        initial="hidden"
-        animate={isInView ? 'visible' : 'hidden'}
-      >
-        <motion.span 
-          className={baseStyles.sectionIcon}
-          variants={fadeInUp}
-          whileHover={{ rotate: [0, -10, 10, 0] }}
-          transition={{ duration: 0.5 }}
-        >
-          🎮
-        </motion.span>
-        
-        <motion.h2 
-          className={baseStyles.sectionTitle}
-          variants={fadeInUp}
-          style={{ color: '#f59e0b' }}
-        >
-          Game Zone
-        </motion.h2>
-        
-        <motion.p 
-          className={baseStyles.sectionDescription}
-          variants={fadeInUp}
-        >
-          Mini-games, interactive toys, and playful experiments. 
-          Level up your fun!
-        </motion.p>
-
-        <motion.div 
-          className={styles.gameShowcase}
-          variants={staggerContainer}
-        >
-          {games.map((game, index) => (
             <motion.div
-              key={game.title}
-              className={styles.gameCard}
-              variants={scaleIn}
-              whileHover={{ y: -8 }}
-              whileTap={{ scale: 0.95 }}
-              custom={index}
+              className={styles.grid}
+              variants={containerVariants}
             >
-              <span className={styles.gameIcon}>{game.icon}</span>
-              <span className={styles.gameTitle}>{game.title}</span>
-              <span className={styles.gameStatus}>{game.status}</span>
+              {games.map((game) => (
+                <motion.div
+                  key={game.id}
+                  className={styles.gameCard}
+                  variants={cardVariants}
+                  whileHover={{ scale: 1.05, y: -10 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => setSelectedGame(game)}
+                  style={{ '--game-color': game.color }}
+                >
+                  <div className={styles.cardGlow} />
+                  <div className={styles.iconWrapper}>
+                    <span className={styles.icon}>{game.icon}</span>
+                  </div>
+                  <h3 className={styles.gameTitle}>{game.title}</h3>
+                  <p className={styles.gameDesc}>{game.description}</p>
+                  <div className={styles.playButton}>
+                    <span>Play Now</span>
+                    <span className={styles.arrow}>→</span>
+                  </div>
+                </motion.div>
+              ))}
             </motion.div>
-          ))}
-        </motion.div>
-
-        <motion.div 
-          className={baseStyles.comingSoon}
-          variants={fadeInUp}
-        >
-          <span 
-            className={baseStyles.pulsingDot} 
-            style={{ background: '#f59e0b' }}
-          />
-          Insert coin to continue
-        </motion.div>
-      </motion.div>
-    </section>
+          </motion.div>
+        ) : (
+          <motion.div
+            key="game-play"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            className={styles.gameContainer}
+          >
+            <button
+              className={styles.backButton}
+              onClick={() => setSelectedGame(null)}
+            >
+              ← Back to Games
+            </button>
+            <selectedGame.component />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 };
