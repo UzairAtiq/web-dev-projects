@@ -175,6 +175,7 @@
     grid-template-columns: 1fr;
   }
 }
+
   composes: section from '../shared/SectionBase.module.css';
   background: linear-gradient(
     180deg,
