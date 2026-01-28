@@ -12,12 +12,14 @@ const VideoStudio = () => {
   const [currentVideo, setCurrentVideo] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [hoveredVideo, setHoveredVideo] = useState(null);
+  const [loading, setLoading] = useState(true);
   const mainPlayerRef = useRef(null);
   const previewRefs = useRef({});
 
   // Load videos from Google Drive
   useEffect(() => {
     const loadVideos = async () => {
+      setLoading(true);
       try {
         const files = await fetchDriveFolder(DRIVE_CONFIG.VIDEOS_FOLDER_ID);
         
@@ -119,6 +121,47 @@ const VideoStudio = () => {
         if (placeholderVideos.length > 0) {
           setCurrentVideo(placeholderVideos[0]);
         }
+      } catch (error) {
+        console.error('Error loading videos from Google Drive:', error);
+        
+        // Fallback to placeholder videos on error
+        const placeholderVideos = [
+          {
+            id: 1,
+            title: 'Mountain Adventure',
+            thumbnail: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=225&fit=crop',
+            url: 'https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+            duration: '9:56'
+          },
+          {
+            id: 2,
+            title: 'Ocean Waves',
+            thumbnail: 'https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=400&h=225&fit=crop',
+            url: 'https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+            duration: '10:53'
+          },
+          {
+            id: 3,
+            title: 'Forest Serenity',
+            thumbnail: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=225&fit=crop',
+            url: 'https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+            duration: '15:13'
+          },
+          {
+            id: 4,
+            title: 'City Lights',
+            thumbnail: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=400&h=225&fit=crop',
+            url: 'https://storage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4',
+            duration: '14:48'
+          }
+        ];
+
+        setVideos(placeholderVideos);
+        if (placeholderVideos.length > 0) {
+          setCurrentVideo(placeholderVideos[0]);
+        }
+      } finally {
+        setLoading(false);
       }
     };
 

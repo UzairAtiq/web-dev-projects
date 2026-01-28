@@ -14,6 +14,7 @@ const PictureGallery = () => {
 
   useEffect(() => {
     const loadImages = async () => {
+      setLoading(true);
       try {
         const files = await fetchDriveFolder(DRIVE_CONFIG.IMAGES_FOLDER_ID);
         const imageFiles = files
@@ -56,6 +57,8 @@ const PictureGallery = () => {
         }
       } catch (error) {
         console.error('Error loading images from Drive:', error);
+      } catch (error) {
+        console.error('Error loading images from Google Drive:', error);
         // Use placeholder images on error
         setImages([
           {
