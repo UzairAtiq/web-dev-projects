@@ -119,11 +119,11 @@ export const parseFileMetadata = (file) => {
     // Use Google Drive's thumbnail API directly
     displayUrl = `https://drive.google.com/thumbnail?id=${file.id}&sz=w2000`;
   } else if (isVideo) {
-    // For videos, use embed URL that works with HTML5 video player
+    // For videos, use embed URL that works with iframe
     displayUrl = `https://drive.google.com/file/d/${file.id}/preview`;
   } else if (isAudio) {
-    // For audio, use direct download URL (works better for streaming)
-    displayUrl = `https://docs.google.com/uc?export=download&id=${file.id}`;
+    // For audio, use the same approach as video - Google Drive preview/embed
+    displayUrl = `https://drive.google.com/uc?export=open&id=${file.id}`;
   } else {
     // Fallback
     displayUrl = getDriveDirectUrl(file.id, 'download');
