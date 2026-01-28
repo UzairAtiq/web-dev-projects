@@ -66,3 +66,13 @@ export const clearPlaygroundStorage = () => {
     return false;
   }
 };
+
+/**
+ * Storage API object for convenient access
+ */
+export const storage = {
+  get: getStorageItem,
+  set: setStorageItem,
+  remove: removeStorageItem,
+  clear: clearPlaygroundStorage,
+};
