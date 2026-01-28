@@ -85,10 +85,12 @@ export const fetchDriveFolder = async (folderId) => {
     }
 
     const response = await fetch(
-      `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents&key=${apiKey}&fields=files(id,name,mimeType,thumbnailLink,webViewLink,webContentLink,iconLink)`
+      `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents+and+mimeType!='application/vnd.google-apps.folder'&key=${apiKey}&fields=files(id,name,mimeType,thumbnailLink,webViewLink,webContentLink,iconLink)`
     );
 
     if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Drive API Error:', response.status, errorText);
       throw new Error(`Failed to fetch files from Google Drive: ${response.status} ${response.statusText}`);
     }
 
@@ -110,18 +112,21 @@ export const parseFileMetadata = (file) => {
   const isVideo = file.mimeType?.startsWith('video/');
   const isAudio = file.mimeType?.startsWith('audio/');
 
-  // Use proper URLs for displaying content
-  // For images: Use thumbnail with large size or direct view
-  // For videos/audio: Use webContentLink if available
+  // Use webContentLink from API for direct download URLs
+  // For images, we can use the thumbnail or the webContentLink
   let displayUrl;
-  if (isImage) {
-    // Use high-resolution thumbnail or direct download link
-    displayUrl = file.thumbnailLink ? file.thumbnailLink.replace(/=s\d+/, '=s2000') : `https://drive.google.com/uc?export=view&id=${file.id}`;
-  } else if (isVideo || isAudio) {
-    // Use webContentLink for direct access or construct download URL
-    displayUrl = file.webContentLink || `https://drive.google.com/uc?export=download&id=${file.id}`;
+  
+  if (file.webContentLink) {
+    // Preferred: Use the webContentLink from API (works for all file types)
+    // For images, modify it to use 'view' instead of 'download' for better embedding
+    if (isImage) {
+      displayUrl = file.webContentLink.replace('&export=download', '&export=view');
+    } else {
+      displayUrl = file.webContentLink;
+    }
   } else {
-    displayUrl = getDriveDirectUrl(file.id, 'view');
+    // Fallback: Construct URL manually
+    displayUrl = getDriveDirectUrl(file.id, isImage ? 'view' : 'download');
   }
 
   return {
@@ -132,7 +137,7 @@ export const parseFileMetadata = (file) => {
     mimeType: file.mimeType,
     url: displayUrl,
     downloadUrl: file.webContentLink || getDriveDirectUrl(file.id, 'download'),
-    thumbnail: file.thumbnailLink || getDriveThumbnailUrl(file.id),
+    thumbnail: file.thumbnailLink ? file.thumbnailLink.replace(/=s\d+/, '=s800') : getDriveThumbnailUrl(file.id, 800),
     viewLink: file.webViewLink,
   };
 };
