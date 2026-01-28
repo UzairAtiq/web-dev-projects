@@ -1,28 +1,31 @@
 # 🎮 Playground Fun
 
-> A premium personal playground featuring media galleries, games, and creative experiments.
+> A premium personal playground featuring media galleries, games, and creative experiments with live Google Drive integration.
 
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react)
 ![Vite](https://img.shields.io/badge/Vite-7-646CFF?style=flat-square&logo=vite)
 ![Framer Motion](https://img.shields.io/badge/Framer%20Motion-12-FF0055?style=flat-square&logo=framer)
+![Google Drive](https://img.shields.io/badge/Google%20Drive-Active-34A853?style=flat-square&logo=googledrive)
 
 ---
 
 ## ✨ Features
 
 ### 🎨 Media & Entertainment
-- 🖼️ **Picture Gallery** - Stunning image display with modern frames and modal view
-- 🎬 **Video Studio** - Video player with playlist and hover preview functionality
-- 🎵 **Music Player** - Audio player with real-time visualizer and playlist management
+- 🖼️ **Picture Gallery** - Auto-loads images from Google Drive with modern frames and modal view
+- 🎬 **Video Studio** - Dynamic video player with Drive integration and hover preview
+- 🎵 **Music Player** - Real-time visualizer with audio files from Google Drive
 - 🎮 **Game Zone** - Interactive games (Number Guessing, Tic Tac Toe) with beautiful animations
 
 ### 🔧 Technical Features
 - ⚡ **Collapsible Sections** - All sections load collapsed with smooth expand/collapse animations
-- 🌐 **Google Drive Integration** - Dynamic file loading from your Google Drive folders
+- 🌐 **Live Google Drive Integration** - Automatically fetches and displays files from configured folders
 - 🎯 **Beautiful Animations** - Enhanced Framer Motion animations throughout
 - 📱 **Fully Responsive** - Optimized for all screen sizes
 - ⭐ **Favorites System** - Pin your favorite sections for quick access
 - 🎨 **Modern UI** - Glass morphism, gradients, and sleek design
+- 🔄 **Loading States** - Smooth loading indicators while fetching content
+- 🛡️ **Error Handling** - Graceful fallbacks to placeholder content
 
 ---
 

@@ -1,12 +1,54 @@
 # Google Drive Integration Guide
 
-This guide will help you set up Google Drive integration to dynamically load images, videos, and music into your Playground Fun application.
+This guide documents the Google Drive integration that dynamically loads images, videos, and music into your Playground Fun application.
 
 ## Overview
 
-The application can fetch files from your Google Drive folders and display them automatically. When you add new files to your Drive folders, they'll appear in the app after a refresh.
+The application fetches files from Google Drive folders and displays them automatically. When you add new files to your Drive folders, they appear in the app after a refresh.
 
-## Setup Instructions
+## ✅ Current Configuration
+
+The app is **actively configured** with the following Google Drive folders:
+
+- **Images Folder**: `1A6q9Pc_t034zZDcZ8bGa25X_2pAiSCih`
+- **Videos Folder**: `159ARNxOCPVlOCjbJAypn6FCOKw71d7as`
+- **Music Folder**: `1L5pDhTKKKIO3mFc5znqoC2Lrra6qX8Wx`
+- **API Key**: Configured (see `src/utils/googleDrive.js`)
+
+## How It Works
+
+1. **Picture Gallery** automatically fetches all images from the Images folder
+2. **Video Studio** loads videos from the Videos folder with thumbnails
+3. **Music Player** retrieves audio files from the Music folder
+
+All sections include:
+- Loading states with animated spinners
+- Error handling with fallback to placeholder content
+- Automatic filtering by MIME type (images/*, video/*, audio/*)
+- Direct download URLs for optimal performance
+
+## Adding New Content
+
+1. Open your configured Google Drive folders:
+   - [Images Folder](https://drive.google.com/drive/folders/1A6q9Pc_t034zZDcZ8bGa25X_2pAiSCih)
+   - [Videos Folder](https://drive.google.com/drive/folders/159ARNxOCPVlOCjbJAypn6FCOKw71d7as)
+   - [Music Folder](https://drive.google.com/drive/folders/1L5pDhTKKKIO3mFc5znqoC2Lrra6qX8Wx)
+
+2. Upload your new files directly to the appropriate folder
+3. Ensure files are shared (Anyone with the link can view)
+4. Refresh the app to see your new content
+
+## Supported File Formats
+
+- **Images**: JPG, JPEG, PNG, GIF, WEBP, BMP, SVG
+- **Videos**: MP4, WEBM, MOV, AVI, MKV
+- **Audio**: MP3, WAV, OGG, M4A, AAC, FLAC
+
+---
+
+## Setup Instructions (For Reference)
+
+This section is for setting up a new configuration or understanding how the current setup was created.
 
 ### Step 1: Create a Google Cloud Project
 
