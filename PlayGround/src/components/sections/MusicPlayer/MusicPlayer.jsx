@@ -52,7 +52,7 @@ const MusicPlayer = () => {
             setCurrentSong(formattedSongs[0]);
           }
         } else {
-          // Fallback to placeholder songs
+          // Fallback to placeholder songs if no files found
           const placeholderSongs = [
             {
               id: 1,
@@ -92,49 +92,6 @@ const MusicPlayer = () => {
           if (placeholderSongs.length > 0) {
             setCurrentSong(placeholderSongs[0]);
           }
-        }
-      } catch (error) {
-        console.error('Error loading songs from Google Drive:', error);
-        
-        // Fallback to placeholder songs on error
-        const placeholderSongs = [
-          {
-            id: 1,
-            title: 'Ambient Dreams',
-            artist: 'Soundscape',
-            duration: '3:45',
-            url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
-            cover: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop'
-          },
-          {
-            id: 2,
-            title: 'Neon Lights',
-            artist: 'Synthwave',
-            duration: '4:12',
-            url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
-            cover: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop'
-          },
-          {
-            id: 3,
-            title: 'Ocean Breeze',
-            artist: 'Nature Sounds',
-            duration: '5:20',
-            url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
-            cover: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop'
-          },
-          {
-            id: 4,
-            title: 'Digital Pulse',
-            artist: 'Electronic',
-            duration: '3:58',
-            url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3',
-            cover: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop'
-          }
-        ];
-
-        setSongs(placeholderSongs);
-        if (placeholderSongs.length > 0) {
-          setCurrentSong(placeholderSongs[0]);
         }
       } catch (error) {
         console.error('Error loading songs from Google Drive:', error);
