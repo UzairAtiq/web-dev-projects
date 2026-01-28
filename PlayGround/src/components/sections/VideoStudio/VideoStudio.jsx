@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './VideoStudio.module.css';
+import { DRIVE_CONFIG, fetchDriveFolder, parseFileMetadata } from '../../../utils/googleDrive';
 
 /**
  * Video Studio Section
@@ -14,41 +15,114 @@ const VideoStudio = () => {
   const mainPlayerRef = useRef(null);
   const previewRefs = useRef({});
 
-  // Placeholder videos - will be replaced with Google Drive videos
+  // Load videos from Google Drive
   useEffect(() => {
-    const placeholderVideos = [
-      {
-        id: 1,
-        title: 'Mountain Adventure',
-        thumbnail: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=225&fit=crop',
-        url: 'https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-        duration: '9:56'
-      },
-      {
-        id: 2,
-        title: 'Ocean Waves',
-        thumbnail: 'https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=400&h=225&fit=crop',
-        url: 'https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
-        duration: '10:53'
-      },
-      {
-        id: 3,
-        title: 'Forest Serenity',
-        thumbnail: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=225&fit=crop',
-        url: 'https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
-        duration: '15:13'
-      },
-      {
-        id: 4,
-        title: 'City Lights',
-        thumbnail: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=400&h=225&fit=crop',
-        url: 'https://storage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4',
-        duration: '14:48'
-      }
-    ];
+    const loadVideos = async () => {
+      try {
+        const files = await fetchDriveFolder(DRIVE_CONFIG.VIDEOS_FOLDER_ID);
+        
+        // Filter for video files only
+        const videoFiles = files.filter(file => 
+          file.mimeType && file.mimeType.startsWith('video/')
+        );
 
-    setVideos(placeholderVideos);
-    setCurrentVideo(placeholderVideos[0]);
+        if (videoFiles.length > 0) {
+          const formattedVideos = videoFiles.map((file, index) => {
+            const metadata = parseFileMetadata(file);
+            return {
+              id: metadata.id,
+              title: metadata.title,
+              thumbnail: metadata.thumbnail,
+              url: metadata.url,
+              duration: 'N/A' // Duration not available from Drive API
+            };
+          });
+          
+          setVideos(formattedVideos);
+          if (formattedVideos.length > 0) {
+            setCurrentVideo(formattedVideos[0]);
+          }
+        } else {
+          // Fallback to placeholder videos
+          const placeholderVideos = [
+            {
+              id: 1,
+              title: 'Mountain Adventure',
+              thumbnail: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=225&fit=crop',
+              url: 'https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+              duration: '9:56'
+            },
+            {
+              id: 2,
+              title: 'Ocean Waves',
+              thumbnail: 'https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=400&h=225&fit=crop',
+              url: 'https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+              duration: '10:53'
+            },
+            {
+              id: 3,
+              title: 'Forest Serenity',
+              thumbnail: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=225&fit=crop',
+              url: 'https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+              duration: '15:13'
+            },
+            {
+              id: 4,
+              title: 'City Lights',
+              thumbnail: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=400&h=225&fit=crop',
+              url: 'https://storage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4',
+              duration: '14:48'
+            }
+          ];
+
+          setVideos(placeholderVideos);
+          if (placeholderVideos.length > 0) {
+            setCurrentVideo(placeholderVideos[0]);
+          }
+        }
+      } catch (error) {
+        console.error('Error loading videos from Google Drive:', error);
+        
+        // Fallback to placeholder videos on error
+        const placeholderVideos = [
+          {
+            id: 1,
+            title: 'Mountain Adventure',
+            thumbnail: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=225&fit=crop',
+            url: 'https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+            duration: '9:56'
+          },
+          {
+            id: 2,
+            title: 'Ocean Waves',
+            thumbnail: 'https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=400&h=225&fit=crop',
+            url: 'https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+            duration: '10:53'
+          },
+          {
+            id: 3,
+            title: 'Forest Serenity',
+            thumbnail: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=225&fit=crop',
+            url: 'https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+            duration: '15:13'
+          },
+          {
+            id: 4,
+            title: 'City Lights',
+            thumbnail: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=400&h=225&fit=crop',
+            url: 'https://storage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4',
+            duration: '14:48'
+          }
+        ];
+
+        setVideos(placeholderVideos);
+        if (placeholderVideos.length > 0) {
+          setCurrentVideo(placeholderVideos[0]);
+        }
+      }
+    };
+
+    loadVideos();
   }, []);
 
   const handleVideoSelect = (video) => {
