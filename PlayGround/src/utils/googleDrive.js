@@ -112,16 +112,18 @@ export const parseFileMetadata = (file) => {
   const isVideo = file.mimeType?.startsWith('video/');
   const isAudio = file.mimeType?.startsWith('audio/');
 
-  // For images: Use direct thumbnail URL format that doesn't rate limit
-  // Format: https://drive.google.com/thumbnail?id=FILE_ID&sz=w2000
+  // Generate appropriate URLs based on file type
   let displayUrl;
   
   if (isImage) {
-    // Use Google Drive's thumbnail API directly - less rate limiting
+    // Use Google Drive's thumbnail API directly
     displayUrl = `https://drive.google.com/thumbnail?id=${file.id}&sz=w2000`;
-  } else if (file.webContentLink) {
-    // For videos/audio, use webContentLink
-    displayUrl = file.webContentLink;
+  } else if (isVideo) {
+    // For videos, use embed URL that works with HTML5 video player
+    displayUrl = `https://drive.google.com/file/d/${file.id}/preview`;
+  } else if (isAudio) {
+    // For audio, use direct download URL (works better for streaming)
+    displayUrl = `https://docs.google.com/uc?export=download&id=${file.id}`;
   } else {
     // Fallback
     displayUrl = getDriveDirectUrl(file.id, 'download');

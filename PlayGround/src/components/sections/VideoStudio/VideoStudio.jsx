@@ -10,7 +10,6 @@ import { DRIVE_CONFIG, fetchDriveFolder, parseFileMetadata } from '../../../util
 const VideoStudio = () => {
   const [videos, setVideos] = useState([]);
   const [currentVideo, setCurrentVideo] = useState(null);
-  const [isPlaying, setIsPlaying] = useState(false);
   const [hoveredVideo, setHoveredVideo] = useState(null);
   const [loading, setLoading] = useState(true);
   const mainPlayerRef = useRef(null);
@@ -156,17 +155,6 @@ const VideoStudio = () => {
     setHoveredVideo(null);
   };
 
-  const togglePlayPause = () => {
-    if (mainPlayerRef.current) {
-      if (isPlaying) {
-        mainPlayerRef.current.pause();
-      } else {
-        mainPlayerRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
-    }
-  };
-
   const listItemVariants = {
     hidden: { opacity: 0, x: 50 },
     visible: (i) => ({
@@ -210,26 +198,18 @@ const VideoStudio = () => {
         >
           {currentVideo && (
             <div className={styles.playerWrapper}>
-              <video
+              <iframe
                 ref={mainPlayerRef}
                 className={styles.mainPlayer}
                 src={currentVideo.url}
-                poster={currentVideo.thumbnail}
-                controls
-                onPlay={() => setIsPlaying(true)}
-                onPause={() => setIsPlaying(false)}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                title={currentVideo.title}
               />
               <div className={styles.videoInfo}>
                 <h3 className={styles.videoTitle}>{currentVideo.title}</h3>
                 <div className={styles.videoMeta}>
                   <span className={styles.duration}>{currentVideo.duration}</span>
-                  <button
-                    className={styles.playButton}
-                    onClick={togglePlayPause}
-                    aria-label={isPlaying ? 'Pause' : 'Play'}
-                  >
-                    {isPlaying ? '⏸' : '▶'}
-                  </button>
                 </div>
               </div>
             </div>
