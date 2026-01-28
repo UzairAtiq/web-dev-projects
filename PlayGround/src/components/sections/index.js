@@ -3,8 +3,8 @@
  */
 
 export { HeroSection } from './HeroSection';
-export { CreativeLab } from './CreativeLab';
-export { MotionStudio } from './MotionStudio';
-export { SoundWaves } from './SoundWaves';
+export { default as PictureGallery } from './PictureGallery';
+export { default as VideoStudio } from './VideoStudio';
+export { default as MusicPlayer } from './MusicPlayer';
 export { GameZone } from './GameZone';
-export { CodeVault } from './CodeVault';
+export { default as GoonSection } from './GoonSection';
