@@ -4,6 +4,23 @@
  */
 
 /**
+ * Configuration helper for Google Drive integration
+ */
+export const DRIVE_CONFIG = {
+  // Images folder ID
+  IMAGES_FOLDER_ID: '1A6q9Pc_t034zZDcZ8bGa25X_2pAiSCih',
+  
+  // Videos folder ID
+  VIDEOS_FOLDER_ID: '159ARNxOCPVlOCjbJAypn6FCOKw71d7as',
+  
+  // Music folder ID
+  MUSIC_FOLDER_ID: '1L5pDhTKKKIO3mFc5znqoC2Lrra6qX8Wx',
+  
+  // Google API Key
+  API_KEY: 'AIzaSyCvENif7JDG7lhjiR7rnt5Yhef-fopo3I0',
+};
+
+/**
  * Extract Google Drive File ID from various URL formats
  * @param {string} url - Google Drive URL
  * @returns {string|null} File ID or null
@@ -60,11 +77,9 @@ export const getDriveThumbnailUrl = (fileId, size = 400) => {
  */
 export const fetchDriveFolder = async (folderId) => {
   try {
-    // Note: This is a simplified approach
-    // For production, you should use Google Drive API with API key
-    const apiKey = 'YOUR_GOOGLE_API_KEY'; // User needs to add their API key
+    const apiKey = DRIVE_CONFIG.API_KEY;
     
-    if (apiKey === 'YOUR_GOOGLE_API_KEY') {
+    if (!apiKey || apiKey === 'YOUR_GOOGLE_API_KEY') {
       console.warn('Please set up Google Drive API key for dynamic file loading');
       return [];
     }
@@ -74,7 +89,7 @@ export const fetchDriveFolder = async (folderId) => {
     );
 
     if (!response.ok) {
-      throw new Error('Failed to fetch files from Google Drive');
+      throw new Error(`Failed to fetch files from Google Drive: ${response.status} ${response.statusText}`);
     }
 
     const data = await response.json();
@@ -98,6 +113,7 @@ export const parseFileMetadata = (file) => {
   return {
     id: file.id,
     name: file.name,
+    title: file.name.replace(/\.[^/.]+$/, ''), // Remove file extension for title
     type: isImage ? 'image' : isVideo ? 'video' : isAudio ? 'audio' : 'other',
     mimeType: file.mimeType,
     url: getDriveDirectUrl(file.id, 'view'),
@@ -105,23 +121,6 @@ export const parseFileMetadata = (file) => {
     thumbnail: file.thumbnailLink || getDriveThumbnailUrl(file.id),
     viewLink: file.webViewLink,
   };
-};
-
-/**
- * Configuration helper for Google Drive integration
- */
-export const DRIVE_CONFIG = {
-  // Images folder ID
-  IMAGES_FOLDER_ID: '1A6q9Pc_t034zZDcZ8bGa25X_2pAiSCih',
-  
-  // Videos folder ID
-  VIDEOS_FOLDER_ID: '159ARNxOCPVlOCjbJAypn6FCOKw71d7as',
-  
-  // Music folder ID
-  MUSIC_FOLDER_ID: '1L5pDhTKKKIO3mFc5znqoC2Lrra6qX8Wx',
-  
-  // Google API Key
-  API_KEY: 'AIzaSyCvENif7JDG7lhjiR7rnt5Yhef-fopo3I0',
 };
 
 /**
