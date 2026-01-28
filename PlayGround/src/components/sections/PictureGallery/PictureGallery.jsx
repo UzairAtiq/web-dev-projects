@@ -16,23 +16,30 @@ const PictureGallery = () => {
     const loadImages = async () => {
       setLoading(true);
       try {
+        console.log('Fetching images from Drive folder:', DRIVE_CONFIG.IMAGES_FOLDER_ID);
         const files = await fetchDriveFolder(DRIVE_CONFIG.IMAGES_FOLDER_ID);
+        console.log('Files received from Drive:', files);
+        
         const imageFiles = files
           .filter(file => file.mimeType?.startsWith('image/'))
           .map((file, index) => {
             const metadata = parseFileMetadata(file);
+            console.log('Parsed image metadata:', metadata);
             return {
               id: metadata.id,
               url: metadata.url,
-              title: metadata.name.replace(/\.[^/.]+$/, ''), // Remove extension
+              title: metadata.title,
               description: `Image ${index + 1}`,
               thumbnail: metadata.thumbnail,
             };
           });
 
+        console.log('Total images processed:', imageFiles.length);
+        
         if (imageFiles.length > 0) {
           setImages(imageFiles);
         } else {
+          console.log('No images found, using placeholders');
           // Fallback to placeholder images if no Drive images found
           setImages([
             {
