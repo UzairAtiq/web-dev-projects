@@ -143,6 +143,30 @@ export const parseFileMetadata = (file) => {
 };
 
 /**
+ * Fetch audio file from Google Drive as blob URL
+ * This approach works around CORS restrictions for audio playback
+ * @param {string} fileId - Google Drive file ID
+ * @returns {Promise<string>} Blob URL for the audio file
+ */
+export const fetchAudioBlob = async (fileId) => {
+  try {
+    const apiKey = DRIVE_CONFIG.API_KEY;
+    const url = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=${apiKey}`;
+    
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch audio: ${response.statusText}`);
+    }
+    
+    const blob = await response.blob();
+    return URL.createObjectURL(blob);
+  } catch (error) {
+    console.error('Error fetching audio blob:', error);
+    throw error;
+  }
+};
+
+/**
  * Instructions for setting up Google Drive integration:
  * 
  * 1. Create Google Cloud Project:

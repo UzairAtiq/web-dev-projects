@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import styles from './MusicPlayer.module.css';
-import { DRIVE_CONFIG, fetchDriveFolder, parseFileMetadata } from '../../../utils/googleDrive';
+import { DRIVE_CONFIG, fetchDriveFolder, parseFileMetadata, fetchAudioBlob } from '../../../utils/googleDrive';
 
 /**
  * Music Player Section
@@ -35,21 +35,34 @@ const MusicPlayer = () => {
         );
 
         if (audioFiles.length > 0) {
-          const formattedSongs = audioFiles.map((file, index) => {
-            const metadata = parseFileMetadata(file);
-            return {
-              id: metadata.id,
-              title: metadata.title,
-              artist: 'Unknown Artist',
-              duration: 'N/A', // Duration not available from Drive API
-              url: metadata.url,
-              cover: metadata.thumbnail || 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop'
-            };
-          });
+          // Fetch audio files as blobs to work around CORS restrictions
+          const formattedSongs = await Promise.all(
+            audioFiles.map(async (file) => {
+              const metadata = parseFileMetadata(file);
+              try {
+                // Fetch audio as blob URL
+                const blobUrl = await fetchAudioBlob(file.id);
+                return {
+                  id: metadata.id,
+                  title: metadata.title,
+                  artist: 'Unknown Artist',
+                  duration: 'N/A', // Duration not available from Drive API
+                  url: blobUrl,
+                  cover: metadata.thumbnail || 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop'
+                };
+              } catch (error) {
+                console.error(`Error loading audio file ${metadata.title}:`, error);
+                return null;
+              }
+            })
+          );
           
-          setSongs(formattedSongs);
-          if (formattedSongs.length > 0) {
-            setCurrentSong(formattedSongs[0]);
+          // Filter out any failed loads
+          const validSongs = formattedSongs.filter(song => song !== null);
+          
+          setSongs(validSongs);
+          if (validSongs.length > 0) {
+            setCurrentSong(validSongs[0]);
           }
         } else {
           // Fallback to placeholder songs if no files found
@@ -142,6 +155,15 @@ const MusicPlayer = () => {
     };
 
     loadSongs();
+    
+    // Cleanup blob URLs on unmount
+    return () => {
+      songs.forEach(song => {
+        if (song.url && song.url.startsWith('blob:')) {
+          URL.revokeObjectURL(song.url);
+        }
+      });
+    };
   }, []);
 
   // Initialize audio visualizer
