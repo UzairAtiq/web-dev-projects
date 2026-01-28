@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { DRIVE_CONFIG, fetchDriveFolder, parseFileMetadata } from '../../../utils/googleDrive';
 import styles from './PictureGallery.module.css';
 
 /**
@@ -11,52 +12,77 @@ const PictureGallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Placeholder images - will be replaced with Google Drive images
   useEffect(() => {
-    // Simulating image load - replace with actual Google Drive integration
-    const placeholderImages = [
-      {
-        id: 1,
-        url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4',
-        title: 'Mountain Landscape',
-        description: 'Beautiful mountain vista'
-      },
-      {
-        id: 2,
-        url: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e',
-        title: 'Forest Path',
-        description: 'Serene forest trail'
-      },
-      {
-        id: 3,
-        url: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470',
-        title: 'Ocean Sunset',
-        description: 'Golden hour by the sea'
-      },
-      {
-        id: 4,
-        url: 'https://images.unsplash.com/photo-1472214103451-9374bd1c798e',
-        title: 'Desert Dunes',
-        description: 'Sandy desert landscape'
-      },
-      {
-        id: 5,
-        url: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e',
-        title: 'Beach Paradise',
-        description: 'Tropical beach scene'
-      },
-      {
-        id: 6,
-        url: 'https://images.unsplash.com/photo-1511593358241-7eea1f3c84e5',
-        title: 'City Lights',
-        description: 'Urban night photography'
-      }
-    ];
+    const loadImages = async () => {
+      try {
+        const files = await fetchDriveFolder(DRIVE_CONFIG.IMAGES_FOLDER_ID);
+        const imageFiles = files
+          .filter(file => file.mimeType?.startsWith('image/'))
+          .map((file, index) => {
+            const metadata = parseFileMetadata(file);
+            return {
+              id: metadata.id,
+              url: metadata.url,
+              title: metadata.name.replace(/\.[^/.]+$/, ''), // Remove extension
+              description: `Image ${index + 1}`,
+              thumbnail: metadata.thumbnail,
+            };
+          });
 
-    setTimeout(() => {
-      setImages(placeholderImages);
-      setLoading(false);
-    }, 800);
+        if (imageFiles.length > 0) {
+          setImages(imageFiles);
+        } else {
+          // Fallback to placeholder images if no Drive images found
+          setImages([
+            {
+              id: 1,
+              url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4',
+              title: 'Mountain Landscape',
+              description: 'Beautiful mountain vista'
+            },
+            {
+              id: 2,
+              url: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e',
+              title: 'Forest Path',
+              description: 'Serene forest trail'
+            },
+            {
+              id: 3,
+              url: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470',
+              title: 'Ocean Sunset',
+              description: 'Golden hour by the sea'
+            },
+          ]);
+        }
+      } catch (error) {
+        console.error('Error loading images from Drive:', error);
+        // Use placeholder images on error
+        setImages([
+          {
+            id: 1,
+            url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4',
+            title: 'Mountain Landscape',
+            description: 'Beautiful mountain vista'
+          },
+          {
+            id: 2,
+            url: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e',
+            title: 'Forest Path',
+            description: 'Serene forest trail'
+          },
+          {
+            id: 3,
+            url: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470',
+            title: 'Ocean Sunset',
+            description: 'Golden hour by the sea'
+          },
+        ]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadImages();
   }, []);
 
   const containerVariants = {
@@ -138,7 +164,7 @@ const PictureGallery = () => {
           >
             <div className={styles.imageWrapper}>
               <img
-                src={`${image.url}?w=600&h=400&fit=crop`}
+                src={image.url}
                 alt={image.title}
                 className={styles.image}
                 loading="lazy"
@@ -178,7 +204,7 @@ const PictureGallery = () => {
                 ✕
               </button>
               <img
-                src={`${selectedImage.url}?w=1200&h=800&fit=crop`}
+                src={selectedImage.url}
                 alt={selectedImage.title}
                 className={styles.modalImage}
               />
