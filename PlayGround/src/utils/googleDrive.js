@@ -85,7 +85,7 @@ export const fetchDriveFolder = async (folderId) => {
     }
 
     const response = await fetch(
-      `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents&key=${apiKey}&fields=files(id,name,mimeType,thumbnailLink,webViewLink)`
+      `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents&key=${apiKey}&fields=files(id,name,mimeType,thumbnailLink,webViewLink,webContentLink,iconLink)`
     );
 
     if (!response.ok) {
@@ -110,14 +110,28 @@ export const parseFileMetadata = (file) => {
   const isVideo = file.mimeType?.startsWith('video/');
   const isAudio = file.mimeType?.startsWith('audio/');
 
+  // Use proper URLs for displaying content
+  // For images: Use thumbnail with large size or direct view
+  // For videos/audio: Use webContentLink if available
+  let displayUrl;
+  if (isImage) {
+    // Use high-resolution thumbnail or direct download link
+    displayUrl = file.thumbnailLink ? file.thumbnailLink.replace(/=s\d+/, '=s2000') : `https://drive.google.com/uc?export=view&id=${file.id}`;
+  } else if (isVideo || isAudio) {
+    // Use webContentLink for direct access or construct download URL
+    displayUrl = file.webContentLink || `https://drive.google.com/uc?export=download&id=${file.id}`;
+  } else {
+    displayUrl = getDriveDirectUrl(file.id, 'view');
+  }
+
   return {
     id: file.id,
     name: file.name,
     title: file.name.replace(/\.[^/.]+$/, ''), // Remove file extension for title
     type: isImage ? 'image' : isVideo ? 'video' : isAudio ? 'audio' : 'other',
     mimeType: file.mimeType,
-    url: getDriveDirectUrl(file.id, 'view'),
-    downloadUrl: getDriveDirectUrl(file.id, 'download'),
+    url: displayUrl,
+    downloadUrl: file.webContentLink || getDriveDirectUrl(file.id, 'download'),
     thumbnail: file.thumbnailLink || getDriveThumbnailUrl(file.id),
     viewLink: file.webViewLink,
   };
