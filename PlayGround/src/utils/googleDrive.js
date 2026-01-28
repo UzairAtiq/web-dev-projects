@@ -111,17 +111,17 @@ export const parseFileMetadata = (file) => {
  * Configuration helper for Google Drive integration
  */
 export const DRIVE_CONFIG = {
-  // Images folder ID - Replace with your folder ID
-  IMAGES_FOLDER_ID: 'YOUR_IMAGES_FOLDER_ID',
+  // Images folder ID
+  IMAGES_FOLDER_ID: '1A6q9Pc_t034zZDcZ8bGa25X_2pAiSCih',
   
-  // Videos folder ID - Replace with your folder ID
-  VIDEOS_FOLDER_ID: 'YOUR_VIDEOS_FOLDER_ID',
+  // Videos folder ID
+  VIDEOS_FOLDER_ID: '159ARNxOCPVlOCjbJAypn6FCOKw71d7as',
   
-  // Music folder ID - Replace with your folder ID
-  MUSIC_FOLDER_ID: 'YOUR_MUSIC_FOLDER_ID',
+  // Music folder ID
+  MUSIC_FOLDER_ID: '1L5pDhTKKKIO3mFc5znqoC2Lrra6qX8Wx',
   
-  // Google API Key - Get from Google Cloud Console
-  API_KEY: 'YOUR_GOOGLE_API_KEY',
+  // Google API Key
+  API_KEY: 'AIzaSyCvENif7JDG7lhjiR7rnt5Yhef-fopo3I0',
 };
 
 /**
