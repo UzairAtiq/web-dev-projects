@@ -112,14 +112,13 @@ export const parseFileMetadata = (file) => {
   const isVideo = file.mimeType?.startsWith('video/');
   const isAudio = file.mimeType?.startsWith('audio/');
 
-  // For images: Use thumbnailLink (no CORS issues) with high resolution
-  // For videos/audio: Use webContentLink for direct download
+  // For images: Use direct thumbnail URL format that doesn't rate limit
+  // Format: https://drive.google.com/thumbnail?id=FILE_ID&sz=w2000
   let displayUrl;
   
-  if (isImage && file.thumbnailLink) {
-    // Use Google's thumbnail URL - supports CORS and works in img tags
-    // Replace size parameter to get high-res version (max 2000px)
-    displayUrl = file.thumbnailLink.replace(/=s\d+/, '=s2000');
+  if (isImage) {
+    // Use Google Drive's thumbnail API directly - less rate limiting
+    displayUrl = `https://drive.google.com/thumbnail?id=${file.id}&sz=w2000`;
   } else if (file.webContentLink) {
     // For videos/audio, use webContentLink
     displayUrl = file.webContentLink;
@@ -136,7 +135,7 @@ export const parseFileMetadata = (file) => {
     mimeType: file.mimeType,
     url: displayUrl,
     downloadUrl: file.webContentLink || getDriveDirectUrl(file.id, 'download'),
-    thumbnail: file.thumbnailLink ? file.thumbnailLink.replace(/=s\d+/, '=s400') : getDriveThumbnailUrl(file.id, 400),
+    thumbnail: `https://drive.google.com/thumbnail?id=${file.id}&sz=w400`,
     viewLink: file.webViewLink,
   };
 };
