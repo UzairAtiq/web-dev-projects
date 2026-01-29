@@ -242,9 +242,27 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 4px;
+  height: 100%;
   opacity: 0;
   transition: opacity var(--transition-fast);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: borderGlow 2s linear infinite;
+}
+
+@keyframes borderGlow {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 .sectionCard:hover .cardGlow {
