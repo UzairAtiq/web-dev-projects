@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './CollapsibleSection.module.css';
 
@@ -6,14 +6,21 @@ import styles from './CollapsibleSection.module.css';
  * Collapsible Section Wrapper
  * Allows sections to be collapsed/expanded with beautiful animations
  */
-const CollapsibleSection = ({ 
+const CollapsibleSection = forwardRef(({ 
   title, 
   icon, 
   gradient, 
   children, 
-  defaultCollapsed = true 
-}) => {
+  defaultCollapsed = true,
+  sectionId
+}, ref) => {
   const [isCollapsed, setIsCollapsed] = useState(defaultCollapsed);
+
+  useImperativeHandle(ref, () => ({
+    expand: () => setIsCollapsed(false),
+    collapse: () => setIsCollapsed(true),
+    toggle: () => setIsCollapsed(!isCollapsed),
+  }));
 
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
@@ -21,6 +28,7 @@ const CollapsibleSection = ({
 
   return (
     <motion.div
+      id={sectionId}
       className={styles.wrapper}
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
@@ -34,7 +42,13 @@ const CollapsibleSection = ({
         whileTap={{ scale: 0.98 }}
       >
         <div className={styles.headerContent}>
-          <span className={styles.icon}>{icon}</span>
+          {typeof icon === 'string' && icon.startsWith('/') || icon.startsWith('data:') || icon.startsWith('http') ? (
+            <img src={icon} alt={title} className={styles.iconImage} />
+          ) : typeof icon === 'string' ? (
+            <span className={styles.icon}>{icon}</span>
+          ) : (
+            <img src={icon} alt={title} className={styles.iconImage} />
+          )}
           <h2 className={styles.title}>{title}</h2>
         </div>
         <motion.div
@@ -82,6 +96,6 @@ const CollapsibleSection = ({
       </AnimatePresence>
     </motion.div>
   );
-};
+});
 
 export default CollapsibleSection;

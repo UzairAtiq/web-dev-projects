@@ -11,6 +11,7 @@ const VideoStudio = () => {
   const [videos, setVideos] = useState([]);
   const [currentVideo, setCurrentVideo] = useState(null);
   const [hoveredVideo, setHoveredVideo] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [loading, setLoading] = useState(true);
   const mainPlayerRef = useRef(null);
   const previewRefs = useRef({});

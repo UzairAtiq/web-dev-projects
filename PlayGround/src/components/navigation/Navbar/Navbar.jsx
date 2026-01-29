@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useSidebar, useFavoritesContext } from '../../../context';
+import { useSidebar, useFavoritesContext, useSectionNavigation } from '../../../context';
 import { useScrollPosition } from '../../../hooks';
-import { scrollToSection, cn } from '../../../utils';
+import { cn } from '../../../utils';
 import { popIn, fadeIn } from '../../../animations';
 import styles from './Navbar.module.css';
 
@@ -12,6 +12,7 @@ import styles from './Navbar.module.css';
 export const Navbar = () => {
   const { isOpen, toggleSidebar } = useSidebar();
   const { getFavoriteSections, removeFavorite } = useFavoritesContext();
+  const { navigateToSection } = useSectionNavigation();
   const { isAtTop } = useScrollPosition();
 
   const favoriteSections = getFavoriteSections();
@@ -21,7 +22,7 @@ export const Navbar = () => {
     if (e.target.closest(`.${styles.favoritePillRemove}`)) {
       return;
     }
-    scrollToSection(sectionId);
+    navigateToSection(sectionId);
   };
 
   const handleRemoveFavorite = (e, sectionId) => {

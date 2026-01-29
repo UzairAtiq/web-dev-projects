@@ -1,7 +1,8 @@
 import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { getRandomQuote, sections } from '../../../data';
-import { scrollToSection } from '../../../utils';
+import { useSectionNavigation } from '../../../context';
+import HeroImage from '../../../assets/Hero_img_2.jpeg';
 import { 
   fadeInUp, 
   fadeInLeft, 
@@ -19,6 +20,7 @@ import styles from './HeroSection.module.css';
 export const HeroSection = () => {
   // Get a random quote on mount (changes on page refresh)
   const [quote, setQuote] = useState(() => getRandomQuote());
+  const { navigateToSection } = useSectionNavigation();
 
   // Memoize the random quote to prevent re-renders
   const currentQuote = useMemo(() => quote, [quote]);
@@ -33,13 +35,18 @@ export const HeroSection = () => {
   };
 
   const handleSectionClick = (sectionId) => {
-    scrollToSection(sectionId);
+    navigateToSection(sectionId);
   };
 
   return (
     <section className={styles.heroSection} id="hero">
       {/* Background Layer */}
       <div className={styles.heroBackground}>
+        <img 
+          src={HeroImage} 
+          alt="Hero Background" 
+          className={styles.heroBackgroundImage}
+        />
         {/* Animated gradient orbs for visual interest */}
         <motion.div 
           className={`${styles.heroOrb} ${styles.heroOrb1}`}
@@ -152,7 +159,9 @@ export const HeroSection = () => {
                   className={styles.cardGlow}
                   style={{ background: section.gradient }}
                 />
-                <span className={styles.cardIcon}>{section.emoji}</span>
+                <div className={styles.cardIconWrapper}>
+                  <img src={section.icon} alt={section.title} className={styles.cardIcon} />
+                </div>
                 <h3 className={styles.cardTitle}>{section.title}</h3>
                 <p className={styles.cardDescription}>{section.description}</p>
                 <div className={styles.cardTags}>

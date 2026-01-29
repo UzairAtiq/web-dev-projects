@@ -16,6 +16,9 @@
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .header::before {
@@ -40,6 +43,15 @@
 .icon {
   font-size: 3rem;
   filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+}
+
+.iconImage {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+  border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .title {
@@ -78,6 +90,12 @@
 
   .icon {
     font-size: 2rem;
+  }
+
+  .iconImage {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
   }
 
   .title {

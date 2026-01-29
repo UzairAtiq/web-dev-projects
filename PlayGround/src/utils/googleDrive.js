@@ -116,8 +116,9 @@ export const parseFileMetadata = (file) => {
   let displayUrl;
   
   if (isImage) {
-    // Use Google Drive's thumbnail API directly
-    displayUrl = `https://drive.google.com/thumbnail?id=${file.id}&sz=w2000`;
+    // Store the file ID - components will need to fetch as blob to avoid CORS
+    // Use direct link instead of API to avoid CORS issues
+    displayUrl = `https://lh3.googleusercontent.com/d/${file.id}`;
   } else if (isVideo) {
     // For videos, use embed URL that works with iframe
     displayUrl = `https://drive.google.com/file/d/${file.id}/preview`;
@@ -137,7 +138,7 @@ export const parseFileMetadata = (file) => {
     mimeType: file.mimeType,
     url: displayUrl,
     downloadUrl: file.webContentLink || getDriveDirectUrl(file.id, 'download'),
-    thumbnail: `https://drive.google.com/thumbnail?id=${file.id}&sz=w400`,
+    thumbnail: `https://lh3.googleusercontent.com/d/${file.id}=s400`,
     viewLink: file.webViewLink,
   };
 };
@@ -162,6 +163,30 @@ export const fetchAudioBlob = async (fileId) => {
     return URL.createObjectURL(blob);
   } catch (error) {
     console.error('Error fetching audio blob:', error);
+    throw error;
+  }
+};
+
+/**
+ * Fetch image file from Google Drive as blob URL
+ * This approach works around CORS restrictions for image display
+ * @param {string} fileId - Google Drive file ID
+ * @returns {Promise<string>} Blob URL for the image file
+ */
+export const fetchImageBlob = async (fileId) => {
+  try {
+    const apiKey = DRIVE_CONFIG.API_KEY;
+    const url = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=${apiKey}`;
+    
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch image: ${response.statusText}`);
+    }
+    
+    const blob = await response.blob();
+    return URL.createObjectURL(blob);
+  } catch (error) {
+    console.error('Error fetching image blob:', error);
     throw error;
   }
 };

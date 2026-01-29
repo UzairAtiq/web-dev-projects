@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useSidebar, useFavoritesContext } from '../../../context';
+import { useSidebar, useFavoritesContext, useSectionNavigation } from '../../../context';
 import { sections } from '../../../data';
-import { scrollToSection, cn } from '../../../utils';
+import { cn } from '../../../utils';
 import { slideInLeft, fadeIn, navStagger, fadeInLeft } from '../../../animations';
 import styles from './Sidebar.module.css';
 
@@ -12,9 +12,10 @@ import styles from './Sidebar.module.css';
 export const Sidebar = () => {
   const { isOpen, closeSidebar } = useSidebar();
   const { toggleFavorite, isFavorite, canAddFavorite } = useFavoritesContext();
+  const { navigateToSection } = useSectionNavigation();
 
   const handleNavClick = (sectionId) => {
-    scrollToSection(sectionId);
+    navigateToSection(sectionId);
     closeSidebar();
   };
 
@@ -86,7 +87,7 @@ export const Sidebar = () => {
                     className={styles.navItemIcon}
                     style={{ background: `${section.color}20` }}
                   >
-                    {section.emoji}
+                    <img src={section.icon} alt={section.title} className={styles.navItemIconImage} />
                   </div>
                   <div className={styles.navItemContent}>
                     <div className={styles.navItemTitle}>{section.title}</div>
