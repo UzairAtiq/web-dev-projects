@@ -99,42 +99,10 @@ export const HeroSection = () => {
         initial="hidden"
         animate="visible"
       >
-        {/* Quote Section (Left) */}
-        <motion.div 
-          className={styles.quoteSection}
-          variants={fadeInLeft}
-        >
-          <div className={styles.quoteWrapper}>
-            <motion.p 
-              className={styles.quoteText}
-              key={currentQuote.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              {currentQuote.text}
-            </motion.p>
-            <div className={styles.quoteAuthor}>
-              <span className={styles.authorName}>— {currentQuote.author}</span>
-              <span className={styles.authorAnime}>{currentQuote.anime}</span>
-            </div>
-          </div>
-          
-          <motion.button
-            className={styles.refreshButton}
-            onClick={handleRefreshQuote}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <span className={styles.refreshIcon}>🔄</span>
-            New Quote
-          </motion.button>
-        </motion.div>
-
-        {/* Sections Grid (Right) */}
+        {/* Sections Grid (Left) */}
         <motion.div 
           className={styles.sectionsArea}
-          variants={fadeInRight}
+          variants={fadeInLeft}
         >
           <h2 className={styles.sectionsTitle}>Explore Sections</h2>
           
@@ -162,17 +130,46 @@ export const HeroSection = () => {
                 <div className={styles.cardIconWrapper}>
                   <img src={section.icon} alt={section.title} className={styles.cardIcon} />
                 </div>
-                <h3 className={styles.cardTitle}>{section.title}</h3>
-                <p className={styles.cardDescription}>{section.description}</p>
-                <div className={styles.cardTags}>
-                  {section.tags.map(tag => (
-                    <span key={tag} className={styles.cardTag}>{tag}</span>
-                  ))}
+                <div className={styles.cardContent}>
+                  <h3 className={styles.cardTitle}>{section.title}</h3>
+                  <p className={styles.cardDescription}>{section.description}</p>
                 </div>
                 <span className={styles.cardArrow}>→</span>
               </motion.div>
             ))}
           </motion.div>
+        </motion.div>
+
+        {/* Quote Section (Right) */}
+        <motion.div 
+          className={styles.quoteSection}
+          variants={fadeInRight}
+        >
+          <div className={styles.quoteWrapper}>
+            <motion.p 
+              className={styles.quoteText}
+              key={currentQuote.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              {currentQuote.text}
+            </motion.p>
+            <div className={styles.quoteAuthor}>
+              <span className={styles.authorName}>— {currentQuote.author}</span>
+              <span className={styles.authorAnime}>{currentQuote.anime}</span>
+            </div>
+          </div>
+          
+          <motion.button
+            className={styles.refreshButton}
+            onClick={handleRefreshQuote}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <span className={styles.refreshIcon}>🔄</span>
+            New Quote
+          </motion.button>
         </motion.div>
       </motion.div>
 

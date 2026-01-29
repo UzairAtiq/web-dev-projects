@@ -89,12 +89,12 @@
   width: 100%;
   max-width: var(--content-max-width);
   display: grid;
-  grid-template-columns: 1fr 1.5fr;
+  grid-template-columns: 1fr 1fr;
   gap: var(--spacing-3xl);
   align-items: center;
 }
 
-/* Quote Section (Left) */
+/* Quote Section (Right) */
 .quoteSection {
   display: flex;
   flex-direction: column;
@@ -178,7 +178,7 @@
   transform: rotate(180deg);
 }
 
-/* Sections Grid (Right) */
+/* Sections Grid (Left) */
 .sectionsArea {
   display: flex;
   flex-direction: column;
@@ -196,22 +196,23 @@
 
 .sectionsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: var(--spacing-md);
+  grid-template-columns: 1fr;
+  gap: var(--spacing-sm);
 }
 
 /* Section Card */
 .sectionCard {
   position: relative;
   display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-lg);
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-lg);
   cursor: pointer;
   overflow: hidden;
   transition: all var(--transition-fast);
@@ -249,8 +250,9 @@
 }
 
 .cardIconWrapper {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
   border-radius: 50%;
   overflow: hidden;
   display: flex;
@@ -266,43 +268,41 @@
   object-fit: cover;
 }
 
+.cardContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2xs);
+}
+
 .cardTitle {
   font-family: var(--font-display);
-  font-size: var(--text-lg);
+  font-size: var(--text-base);
   font-weight: var(--weight-bold);
   color: var(--color-text);
 }
 
 .cardDescription {
-  font-size: var(--text-sm);
+  font-size: var(--text-xs);
   color: var(--color-text-muted);
   line-height: var(--leading-relaxed);
 }
 
 .cardTags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-xs);
-  margin-top: var(--spacing-xs);
+  display: none;
 }
 
 .cardTag {
-  padding: var(--spacing-2xs) var(--spacing-sm);
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: var(--radius-full);
-  font-size: var(--text-xs);
-  color: var(--color-text-muted);
+  display: none;
 }
 
 .cardArrow {
-  position: absolute;
-  bottom: var(--spacing-md);
-  right: var(--spacing-md);
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.05);
   color: var(--color-text-muted);
@@ -369,12 +369,12 @@
     gap: var(--spacing-2xl);
   }
   
-  .quoteSection {
-    order: 2;
-  }
-  
   .sectionsArea {
     order: 1;
+  }
+  
+  .quoteSection {
+    order: 2;
   }
 }
 
