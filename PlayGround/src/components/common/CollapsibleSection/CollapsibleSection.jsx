@@ -43,11 +43,65 @@ const CollapsibleSection = forwardRef(({
       >
         <div className={styles.headerContent}>
           {typeof icon === 'string' && icon.startsWith('/') || icon.startsWith('data:') || icon.startsWith('http') ? (
-            <img src={icon} alt={title} className={styles.iconImage} />
+            <motion.img 
+              src={icon} 
+              alt={title} 
+              className={styles.iconImage}
+              animate={isCollapsed ? {
+                rotate: [0, 5, -5, 0],
+                scale: [1, 1.05, 1]
+              } : {
+                rotate: 0,
+                scale: 1
+              }}
+              transition={isCollapsed ? {
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut"
+              } : {
+                duration: 0.3
+              }}
+            />
           ) : typeof icon === 'string' ? (
-            <span className={styles.icon}>{icon}</span>
+            <motion.span 
+              className={styles.icon}
+              animate={isCollapsed ? {
+                rotate: [0, 5, -5, 0],
+                scale: [1, 1.1, 1]
+              } : {
+                rotate: 0,
+                scale: 1
+              }}
+              transition={isCollapsed ? {
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut"
+              } : {
+                duration: 0.3
+              }}
+            >
+              {icon}
+            </motion.span>
           ) : (
-            <img src={icon} alt={title} className={styles.iconImage} />
+            <motion.img 
+              src={icon} 
+              alt={title} 
+              className={styles.iconImage}
+              animate={isCollapsed ? {
+                rotate: [0, 5, -5, 0],
+                scale: [1, 1.05, 1]
+              } : {
+                rotate: 0,
+                scale: 1
+              }}
+              transition={isCollapsed ? {
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut"
+              } : {
+                duration: 0.3
+              }}
+            />
           )}
           <motion.h2 
             className={styles.title}
