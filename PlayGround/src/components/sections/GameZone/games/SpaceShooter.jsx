@@ -10,6 +10,7 @@ const SpaceShooter = () => {
   const [bullets, setBullets] = useState([]);
   const [enemies, setEnemies] = useState([]);
   const [leaderboard, setLeaderboard] = useState([]);
+  const [keys, setKeys] = useState({});
   const gameRef = useRef(null);
 
   useEffect(() => {
@@ -37,19 +38,44 @@ const SpaceShooter = () => {
     if (!gameStarted || gameOver) return;
 
     const handleKeyDown = (e) => {
-      if (e.key === 'ArrowLeft') {
-        setPlayerPos((prev) => Math.max(5, prev - 5));
-      } else if (e.key === 'ArrowRight') {
-        setPlayerPos((prev) => Math.min(95, prev + 5));
-      } else if (e.key === ' ') {
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === ' ') {
         e.preventDefault();
-        shoot();
+        setKeys((prev) => ({ ...prev, [e.key]: true }));
+      }
+    };
+
+    const handleKeyUp = (e) => {
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === ' ') {
+        setKeys((prev) => ({ ...prev, [e.key]: false }));
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [gameStarted, gameOver, playerPos]);
+    window.addEventListener('keyup', handleKeyUp);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  }, [gameStarted, gameOver]);
+
+  // Process continuous movement
+  useEffect(() => {
+    if (!gameStarted || gameOver) return;
+
+    const interval = setInterval(() => {
+      if (keys['ArrowLeft']) {
+        setPlayerPos((prev) => Math.max(5, prev - 2));
+      }
+      if (keys['ArrowRight']) {
+        setPlayerPos((prev) => Math.min(95, prev + 2));
+      }
+      if (keys[' ']) {
+        shoot();
+      }
+    }, 30);
+
+    return () => clearInterval(interval);
+  }, [keys, gameStarted, gameOver, playerPos]);
 
   // Shoot bullets
   const shoot = () => {
