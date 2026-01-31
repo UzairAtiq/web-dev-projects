@@ -49,7 +49,29 @@ const CollapsibleSection = forwardRef(({
           ) : (
             <img src={icon} alt={title} className={styles.iconImage} />
           )}
-          <h2 className={styles.title}>{title}</h2>
+          <motion.h2 
+            className={styles.title}
+            animate={isCollapsed ? {
+              scale: [1, 1.03, 1],
+              textShadow: [
+                '0 2px 10px rgba(0, 0, 0, 0.3)',
+                '0 4px 20px rgba(255, 255, 255, 0.5)',
+                '0 2px 10px rgba(0, 0, 0, 0.3)'
+              ]
+            } : {
+              scale: 1,
+              textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)'
+            }}
+            transition={isCollapsed ? {
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            } : {
+              duration: 0.3
+            }}
+          >
+            {title}
+          </motion.h2>
         </div>
         <motion.div
           className={styles.toggleIcon}
