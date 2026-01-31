@@ -97,6 +97,18 @@
   transform: translateX(-50%);
   transition: left 0.1s ease;
   filter: drop-shadow(0 0 10px rgba(34, 211, 238, 0.8));
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spaceshipImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform: rotate(-90deg);
 }
 
 .bullet {

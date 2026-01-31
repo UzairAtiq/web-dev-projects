@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import styles from './SpaceShooter.module.css';
+import spaceshipImg from '../../../../assets/Games/SpaceShip.jpeg';
 
 const SpaceShooter = () => {
   const [gameStarted, setGameStarted] = useState(false);
@@ -212,7 +213,7 @@ const SpaceShooter = () => {
             animate={{ x: 0 }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
           >
-            🚀
+            <img src={spaceshipImg} alt="Spaceship" className={styles.spaceshipImage} />
           </motion.div>
 
           {bullets.map((bullet) => (
