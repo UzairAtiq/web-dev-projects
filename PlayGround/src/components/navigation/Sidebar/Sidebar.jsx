@@ -1,31 +1,20 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useSidebar, useFavoritesContext, useSectionNavigation } from '../../../context';
+import { useSidebar, useSectionNavigation } from '../../../context';
 import { sections } from '../../../data';
-import { cn } from '../../../utils';
 import { slideInLeft, fadeIn, navStagger, fadeInLeft } from '../../../animations';
 import styles from './Sidebar.module.css';
 
 /**
  * Sidebar Component
- * Animated slide-out panel with navigation and favorite management
+ * Animated slide-out panel with navigation
  */
 export const Sidebar = () => {
   const { isOpen, closeSidebar } = useSidebar();
-  const { toggleFavorite, isFavorite, canAddFavorite } = useFavoritesContext();
   const { navigateToSection } = useSectionNavigation();
 
   const handleNavClick = (sectionId) => {
     navigateToSection(sectionId);
     closeSidebar();
-  };
-
-  const handleFavoriteClick = (e, sectionId) => {
-    e.stopPropagation();
-    if (!isFavorite(sectionId) && !canAddFavorite) {
-      // Could show a toast here
-      return;
-    }
-    toggleFavorite(sectionId);
   };
 
   return (
@@ -52,10 +41,6 @@ export const Sidebar = () => {
           >
             {/* Header */}
             <div className={styles.sidebarHeader}>
-              <div className={styles.sidebarTitle}>
-                <span className={styles.sidebarTitleIcon}>🧭</span>
-                <span>Navigate</span>
-              </div>
               <motion.button
                 className={styles.closeButton}
                 onClick={closeSidebar}
@@ -95,22 +80,6 @@ export const Sidebar = () => {
                       {section.description}
                     </div>
                   </div>
-                  <motion.button
-                    className={cn(
-                      styles.favoriteButton,
-                      isFavorite(section.id) && styles.favoriteButtonActive
-                    )}
-                    onClick={(e) => handleFavoriteClick(e, section.id)}
-                    whileHover={{ scale: 1.2 }}
-                    whileTap={{ scale: 0.9 }}
-                    aria-label={
-                      isFavorite(section.id)
-                        ? `Remove ${section.title} from favorites`
-                        : `Add ${section.title} to favorites`
-                    }
-                  >
-                    {isFavorite(section.id) ? '★' : '☆'}
-                  </motion.button>
                 </motion.button>
               ))}
             </motion.nav>
