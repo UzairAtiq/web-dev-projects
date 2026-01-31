@@ -172,19 +172,6 @@ export const HeroSection = () => {
           </motion.button>
         </motion.div>
       </motion.div>
-
-      {/* Scroll Indicator */}
-      <motion.div 
-        className={styles.scrollIndicator}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.5, duration: 0.5 }}
-      >
-        <div className={styles.scrollMouse}>
-          <div className={styles.scrollWheel} />
-        </div>
-        <span>Scroll to explore</span>
-      </motion.div>
     </section>
   );
 };
