@@ -4,6 +4,9 @@ import styles from './GameZone.module.css';
 import NumberGuess from './games/NumberGuess';
 import TicTacToe from './games/TicTacToe';
 import SpaceShooter from './games/SpaceShooter';
+import numberIcon from '../../../assets/Games/Number.png';
+import ticTacToeIcon from '../../../assets/Games/TIcTacTow.png';
+import spaceShooterIcon from '../../../assets/Games/SpaceShooter Background Removed.png';
 
 /**
  * Game Zone Section
@@ -17,7 +20,7 @@ export const GameZone = () => {
       id: 'number-guess',
       title: 'Number Guessing',
       description: 'Guess the secret number between 1-100',
-      icon: '🎯',
+      icon: numberIcon,
       color: '#f59e0b',
       component: NumberGuess
     },
@@ -25,7 +28,7 @@ export const GameZone = () => {
       id: 'tic-tac-toe',
       title: 'Tic Tac Toe',
       description: 'Classic game with modern design',
-      icon: '❌⭕',
+      icon: ticTacToeIcon,
       color: '#ef4444',
       component: TicTacToe
     },
@@ -33,7 +36,7 @@ export const GameZone = () => {
       id: 'space-shooter',
       title: 'Space Shooter',
       description: 'Defend Earth from alien invaders',
-      icon: '🚀',
+      icon: spaceShooterIcon,
       color: '#8b5cf6',
       component: SpaceShooter
     }
@@ -95,7 +98,11 @@ export const GameZone = () => {
                 >
                   <div className={styles.cardGlow} />
                   <div className={styles.iconWrapper}>
-                    <span className={styles.icon}>{game.icon}</span>
+                    {typeof game.icon === 'string' && game.icon.startsWith('/') || game.icon.includes('.png') || game.icon.includes('.jpeg') ? (
+                      <img src={game.icon} alt={game.title} className={styles.iconImage} />
+                    ) : (
+                      <span className={styles.icon}>{game.icon}</span>
+                    )}
                   </div>
                   <h3 className={styles.gameTitle}>{game.title}</h3>
                   <p className={styles.gameDesc}>{game.description}</p>
