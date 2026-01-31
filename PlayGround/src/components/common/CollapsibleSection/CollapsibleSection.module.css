@@ -135,8 +135,8 @@
 }
 
 .content {
-  background: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
+  background: transparent;
+  backdrop-filter: none;
 }
 
 @media (max-width: 768px) {
