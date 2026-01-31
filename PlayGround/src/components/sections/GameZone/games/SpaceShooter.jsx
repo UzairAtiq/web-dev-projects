@@ -12,6 +12,7 @@ const SpaceShooter = () => {
   const [enemies, setEnemies] = useState([]);
   const [leaderboard, setLeaderboard] = useState([]);
   const [keys, setKeys] = useState({});
+  const lastShotTime = useRef(0);
   const gameRef = useRef(null);
 
   useEffect(() => {
@@ -80,6 +81,10 @@ const SpaceShooter = () => {
 
   // Shoot bullets
   const shoot = () => {
+    const now = Date.now();
+    if (now - lastShotTime.current < 250) return; // Limit to 4 shots per second
+    
+    lastShotTime.current = now;
     const newBullet = {
       id: Date.now(),
       x: playerPos,
