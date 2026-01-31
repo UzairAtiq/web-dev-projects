@@ -9,10 +9,28 @@ const NumberGuess = () => {
   const [attempts, setAttempts] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [history, setHistory] = useState([]);
+  const [leaderboard, setLeaderboard] = useState([]);
 
   useEffect(() => {
     resetGame();
+    loadLeaderboard();
   }, []);
+
+  const loadLeaderboard = () => {
+    const saved = localStorage.getItem('numberGuessLeaderboard');
+    if (saved) {
+      setLeaderboard(JSON.parse(saved));
+    }
+  };
+
+  const saveScore = (attempts) => {
+    const newScore = { attempts, date: new Date().toLocaleDateString() };
+    const updated = [...leaderboard, newScore]
+      .sort((a, b) => a.attempts - b.attempts)
+      .slice(0, 5);
+    setLeaderboard(updated);
+    localStorage.setItem('numberGuessLeaderboard', JSON.stringify(updated));
+  };
 
   const resetGame = () => {
     setTargetNumber(Math.floor(Math.random() * 100) + 1);
@@ -41,6 +59,7 @@ const NumberGuess = () => {
     if (guessNum === targetNumber) {
       setMessage(`🎉 Congratulations! You found it in ${newAttempts} attempts!`);
       setGameOver(true);
+      saveScore(newAttempts);
     } else if (guessNum < targetNumber) {
       const diff = targetNumber - guessNum;
       if (diff > 20) setMessage('🥶 Too low! Way off!');
@@ -146,6 +165,21 @@ const NumberGuess = () => {
                   </motion.div>
                 ))}
               </AnimatePresence>
+            </div>
+          </div>
+        )}
+
+        {leaderboard.length > 0 && (
+          <div className={styles.leaderboard}>
+            <h3 className={styles.leaderboardTitle}>🏆 Top Scores</h3>
+            <div className={styles.leaderboardList}>
+              {leaderboard.map((score, index) => (
+                <div key={index} className={styles.leaderboardItem}>
+                  <span className={styles.rank}>#{index + 1}</span>
+                  <span className={styles.scoreAttempts}>{score.attempts} attempts</span>
+                  <span className={styles.scoreDate}>{score.date}</span>
+                </div>
+              ))}
             </div>
           </div>
         )}

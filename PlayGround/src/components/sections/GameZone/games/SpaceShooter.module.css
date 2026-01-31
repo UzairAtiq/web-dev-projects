@@ -134,3 +134,34 @@
     transform: translateX(-50%) rotate(5deg);
   }
 }
+
+.leaderboard {
+  margin-top: 20px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 12px;
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.leaderboard h4 {
+  color: #fbbf24;
+  margin: 0 0 15px 0;
+  font-size: 20px;
+  text-align: center;
+}
+
+.leaderboardEntry {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px;
+  margin: 5px 0;
+  background: rgba(139, 92, 246, 0.1);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+}
+
+.leaderboardEntry span:first-child {
+  color: #fbbf24;
+  font-weight: 700;
+}

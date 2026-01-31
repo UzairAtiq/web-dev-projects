@@ -9,7 +9,28 @@ const SpaceShooter = () => {
   const [playerPos, setPlayerPos] = useState(50);
   const [bullets, setBullets] = useState([]);
   const [enemies, setEnemies] = useState([]);
+  const [leaderboard, setLeaderboard] = useState([]);
   const gameRef = useRef(null);
+
+  useEffect(() => {
+    loadLeaderboard();
+  }, []);
+
+  const loadLeaderboard = () => {
+    const saved = localStorage.getItem('spaceShooterLeaderboard');
+    if (saved) {
+      setLeaderboard(JSON.parse(saved));
+    }
+  };
+
+  const saveScore = (finalScore) => {
+    const newScore = { score: finalScore, date: new Date().toLocaleDateString() };
+    const updated = [...leaderboard, newScore]
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 5);
+    setLeaderboard(updated);
+    localStorage.setItem('spaceShooterLeaderboard', JSON.stringify(updated));
+  };
 
   // Player movement
   useEffect(() => {
@@ -103,9 +124,10 @@ const SpaceShooter = () => {
     enemies.forEach((enemy) => {
       if (enemy.y > 85) {
         setGameOver(true);
+        saveScore(score);
       }
     });
-  }, [bullets, enemies, gameStarted, gameOver]);
+  }, [bullets, enemies, gameStarted, gameOver, score]);
 
   const startGame = () => {
     setGameStarted(true);
@@ -141,6 +163,18 @@ const SpaceShooter = () => {
           <button className={styles.restartButton} onClick={startGame}>
             Play Again
           </button>
+          {leaderboard.length > 0 && (
+            <div className={styles.leaderboard}>
+              <h4>🏆 Top Scores</h4>
+              {leaderboard.map((entry, index) => (
+                <div key={index} className={styles.leaderboardEntry}>
+                  <span>#{index + 1}</span>
+                  <span>{entry.score} pts</span>
+                  <span>{entry.date}</span>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
 
