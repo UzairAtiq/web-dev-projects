@@ -135,115 +135,26 @@
   gap: var(--spacing-md);
   flex: 1;
 }
-  justify-content: center;
-  max-width: 600px;
-}
 
-/* Favorites Container */
-.favoritesContainer {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-  padding: var(--spacing-2xs);
-  border-radius: var(--radius-xl);
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-/* Individual Favorite Pill */
-.favoritePill {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-  padding: var(--spacing-xs) var(--spacing-md);
-  border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--color-text);
-  font-size: var(--text-sm);
-  font-weight: var(--weight-medium);
-  cursor: pointer;
-  transition: all var(--transition-fast);
-  white-space: nowrap;
-}
-
-.favoritePill:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: var(--color-primary);
-  box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
-}
-
-.favoritePillIcon {
-  font-size: 1rem;
-}
-
-.favoritePillRemove {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  font-size: 10px;
-  opacity: 0;
-  transform: scale(0.8);
-  transition: all var(--transition-fast);
-}
-
-.favoritePill:hover .favoritePillRemove {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.favoritePillRemove:hover {
-  background: var(--color-error);
-}
-
-/* Empty state */
-.emptyFavorites {
-  padding: var(--spacing-xs) var(--spacing-md);
-  color: var(--color-text-muted);
-  font-size: var(--text-sm);
-  font-style: italic;
-}
-
-/* Right section with logo */
-.navbarRight {
-  display: flex;
-  align-items: center;
-}
-
-/* Logo */
-.logo {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-  font-family: var(--font-display);
-  font-size: var(--text-lg);
-  font-weight: var(--weight-bold);
-  color: var(--color-text);
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.logoIcon {
-  font-size: 1.5rem;
-}
-
-.logoText {
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Responsive */
+/* Media Queries */
 @media (max-width: 768px) {
-  .navbarCenter {
-    display: none;
+  .navbar {
+    padding: 0 var(--spacing-md);
   }
-  
+
+  .navbarCenter {
+    flex: 2;
+  }
+
+  .logo {
+    font-size: 1rem;
+  }
+
+  .logoImage {
+    width: 32px;
+    height: 32px;
+  }
+
   .logoText {
     display: none;
   }
