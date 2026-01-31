@@ -143,7 +143,10 @@ const SpaceShooter = () => {
     if (!gameStarted || gameOver) return;
 
     const interval = setInterval(() => {
-      setDifficulty((prev) => Math.min(prev + 1, 5)); // Max difficulty level 5
+      setDifficulty((prev) => {
+        const newDiff = Math.min(prev + 1, 10); // Max difficulty level 10
+        return newDiff;
+      });
     }, 15000); // Increase every 15 seconds
 
     return () => clearInterval(interval);
