@@ -11,6 +11,22 @@ const SpaceShooter = () => {
   const [enemies, setEnemies] = useState([]);
   const gameRef = useRef(null);
 
+  // Player movement
+  useEffect(() => {
+    if (!gameStarted || gameOver) return;
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'ArrowLeft') {
+        setPlayerPos((prev) => Math.max(5, prev - 5));
+      } else if (e.key === 'ArrowRight') {
+        setPlayerPos((prev) => Math.min(95, prev + 5));
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [gameStarted, gameOver]);
+
   return (
     <div className={styles.spaceShooter} ref={gameRef}>
       <div className={styles.header}>
@@ -28,6 +44,19 @@ const SpaceShooter = () => {
           </button>
         </div>
       ) : null}
+
+      {gameStarted && !gameOver && (
+        <div className={styles.gameArea}>
+          <motion.div
+            className={styles.player}
+            style={{ left: `${playerPos}%` }}
+            animate={{ x: 0 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+          >
+            🚀
+          </motion.div>
+        </div>
+      )}
     </div>
   );
 };
