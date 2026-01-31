@@ -97,6 +97,11 @@
   border: 2px solid rgba(245, 158, 11, 0.3);
 }
 
+.gameCard:nth-child(3) .iconWrapper {
+  width: 140px;
+  height: 140px;
+}
+
 .icon {
   filter: drop-shadow(0 4px 10px rgba(245, 158, 11, 0.3));
 }
