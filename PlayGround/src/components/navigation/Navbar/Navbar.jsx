@@ -1,34 +1,17 @@
-import { motion, AnimatePresence } from 'framer-motion';
-import { useSidebar, useFavoritesContext, useSectionNavigation } from '../../../context';
+import { motion } from 'framer-motion';
+import { useSidebar, useSectionNavigation } from '../../../context';
 import { useScrollPosition } from '../../../hooks';
 import { cn } from '../../../utils';
-import { popIn, fadeIn } from '../../../animations';
 import styles from './Navbar.module.css';
+import LogoImage from '../../../assets/Logo.png';
 
 /**
  * Navbar Component
- * Fixed top navigation with menu toggle, favorites, and logo
+ * Fixed top navigation with menu toggle and logo
  */
 export const Navbar = () => {
   const { isOpen, toggleSidebar } = useSidebar();
-  const { getFavoriteSections, removeFavorite } = useFavoritesContext();
-  const { navigateToSection } = useSectionNavigation();
   const { isAtTop } = useScrollPosition();
-
-  const favoriteSections = getFavoriteSections();
-
-  const handleFavoriteClick = (sectionId, e) => {
-    // If clicking the remove button, don't scroll
-    if (e.target.closest(`.${styles.favoritePillRemove}`)) {
-      return;
-    }
-    navigateToSection(sectionId);
-  };
-
-  const handleRemoveFavorite = (e, sectionId) => {
-    e.stopPropagation();
-    removeFavorite(sectionId);
-  };
 
   return (
     <motion.nav
@@ -54,59 +37,8 @@ export const Navbar = () => {
         </motion.button>
       </div>
 
-      {/* Center - Favorites */}
+      {/* Center - Logo */}
       <div className={styles.navbarCenter}>
-        <motion.div 
-          className={styles.favoritesContainer}
-          variants={fadeIn}
-          initial="hidden"
-          animate="visible"
-        >
-          <AnimatePresence mode="popLayout">
-            {favoriteSections.length > 0 ? (
-              favoriteSections.map((section) => (
-                <motion.button
-                  key={section.id}
-                  className={styles.favoritePill}
-                  onClick={(e) => handleFavoriteClick(section.id, e)}
-                  variants={popIn}
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                  layout
-                  layoutId={`favorite-${section.id}`}
-                  style={{
-                    '--pill-color': section.color,
-                  }}
-                >
-                  <span className={styles.favoritePillIcon}>{section.emoji}</span>
-                  <span>{section.shortTitle}</span>
-                  <span 
-                    className={styles.favoritePillRemove}
-                    onClick={(e) => handleRemoveFavorite(e, section.id)}
-                    role="button"
-                    aria-label={`Remove ${section.title} from favorites`}
-                  >
-                    ✕
-                  </span>
-                </motion.button>
-              ))
-            ) : (
-              <motion.span 
-                className={styles.emptyFavorites}
-                variants={fadeIn}
-                initial="hidden"
-                animate="visible"
-              >
-                ⭐ Add favorites from sidebar
-              </motion.span>
-            )}
-          </AnimatePresence>
-        </motion.div>
-      </div>
-
-      {/* Right - Logo */}
-      <div className={styles.navbarRight}>
         <motion.a
           href="#"
           className={styles.logo}
@@ -117,9 +49,13 @@ export const Navbar = () => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          <span className={styles.logoIcon}>🎮</span>
+          <img src={LogoImage} alt="Playground Logo" className={styles.logoImage} />
           <span className={styles.logoText}>Playground</span>
         </motion.a>
+      </div>
+
+      {/* Right - Empty for balance */}
+      <div className={styles.navbarRight}>
       </div>
     </motion.nav>
   );
