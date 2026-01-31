@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import styles from './GameZone.module.css';
 import NumberGuess from './games/NumberGuess';
 import TicTacToe from './games/TicTacToe';
+import SpaceShooter from './games/SpaceShooter';
 
 /**
  * Game Zone Section
@@ -27,6 +28,14 @@ export const GameZone = () => {
       icon: '❌⭕',
       color: '#ef4444',
       component: TicTacToe
+    },
+    {
+      id: 'space-shooter',
+      title: 'Space Shooter',
+      description: 'Defend Earth from alien invaders',
+      icon: '🚀',
+      color: '#8b5cf6',
+      component: SpaceShooter
     }
   ];
 
