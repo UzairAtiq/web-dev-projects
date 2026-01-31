@@ -15,12 +15,14 @@ export const MainLayout = ({ children }) => {
       <main id="main-content" className={styles.mainContent}>
         <div className={styles.balatroBg}>
           <Balatro
-            isRotate={false}
+            isRotate={true}
             mouseInteraction
-            pixelFilter={745}
-            color1="#DE443B"
-            color2="#006BB4"
-            color3="#162325"
+            pixelFilter={600}
+            color1="#8b5cf6"
+            color2="#3b82f6"
+            color3="#1e1b4b"
+            spinSpeed={3}
+            contrast={2.5}
           />
         </div>
         {children}
