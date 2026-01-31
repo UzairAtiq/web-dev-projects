@@ -12,6 +12,7 @@ const SpaceShooter = () => {
   const [enemies, setEnemies] = useState([]);
   const [leaderboard, setLeaderboard] = useState([]);
   const [keys, setKeys] = useState({});
+  const [difficulty, setDifficulty] = useState(1);
   const lastShotTime = useRef(0);
   const gameRef = useRef(null);
 
@@ -110,6 +111,7 @@ const SpaceShooter = () => {
   useEffect(() => {
     if (!gameStarted || gameOver) return;
 
+    const spawnRate = Math.max(800, 2000 - (difficulty * 200)); // Faster spawning
     const interval = setInterval(() => {
       const newEnemy = {
         id: Date.now(),
@@ -117,20 +119,32 @@ const SpaceShooter = () => {
         y: 5
       };
       setEnemies((prev) => [...prev, newEnemy]);
-    }, 2000);
+    }, spawnRate);
 
     return () => clearInterval(interval);
-  }, [gameStarted, gameOver]);
+  }, [gameStarted, gameOver, difficulty]);
 
   // Move enemies
   useEffect(() => {
     if (!gameStarted || gameOver) return;
 
+    const speed = 1 + (difficulty * 0.3); // Faster movement
     const interval = setInterval(() => {
       setEnemies((prev) =>
-        prev.filter((enemy) => enemy.y < 90).map((enemy) => ({ ...enemy, y: enemy.y + 1 }))
+        prev.filter((enemy) => enemy.y < 90).map((enemy) => ({ ...enemy, y: enemy.y + speed }))
       );
     }, 100);
+
+    return () => clearInterval(interval);
+  }, [gameStarted, gameOver, difficulty]);
+
+  // Increase difficulty over time
+  useEffect(() => {
+    if (!gameStarted || gameOver) return;
+
+    const interval = setInterval(() => {
+      setDifficulty((prev) => Math.min(prev + 1, 5)); // Max difficulty level 5
+    }, 15000); // Increase every 15 seconds
 
     return () => clearInterval(interval);
   }, [gameStarted, gameOver]);
@@ -168,13 +182,19 @@ const SpaceShooter = () => {
     setPlayerPos(50);
     setBullets([]);
     setEnemies([]);
+    setDifficulty(1);
   };
 
   return (
     <div className={styles.spaceShooter} ref={gameRef}>
       <div className={styles.header}>
         <h2 className={styles.title}>Space Shooter</h2>
-        <div className={styles.score}>Score: {score}</div>
+        <div className={styles.stats}>
+          <div className={styles.score}>Score: {score}</div>
+          {gameStarted && !gameOver && (
+            <div className={styles.difficulty}>Level: {difficulty}</div>
+          )}
+        </div>
       </div>
       
       {!gameStarted ? (

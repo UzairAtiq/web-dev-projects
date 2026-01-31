@@ -25,11 +25,24 @@
   text-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
 }
 
+.stats {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
 .score {
   font-size: 24px;
   font-weight: 600;
   color: #fbbf24;
   text-shadow: 0 0 10px rgba(251, 191, 36, 0.6);
+}
+
+.difficulty {
+  font-size: 20px;
+  font-weight: 600;
+  color: #8b5cf6;
+  text-shadow: 0 0 10px rgba(139, 92, 246, 0.6);
 }
 
 .startScreen,
