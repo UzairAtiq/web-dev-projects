@@ -19,7 +19,7 @@ export const sections = [
     icon: PictureIcon,
     emoji: '🖼️',
     color: '#6366f1',
-    gradient: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
+    gradient: 'linear-gradient(135deg, rgba(99, 102, 241, 0.3) 0%, rgba(139, 92, 246, 0.3) 100%)',
     tags: ['Photos', 'Gallery', 'Images'],
   },
   {
@@ -30,7 +30,7 @@ export const sections = [
     icon: VideoIcon,
     emoji: '🎬',
     color: '#ec4899',
-    gradient: 'linear-gradient(135deg, #ec4899 0%, #f472b6 100%)',
+    gradient: 'linear-gradient(135deg, rgba(236, 72, 153, 0.3) 0%, rgba(244, 114, 182, 0.3) 100%)',
     tags: ['Videos', 'Movies', 'Player'],
   },
   {
@@ -41,7 +41,7 @@ export const sections = [
     icon: MusicIcon,
     emoji: '🎵',
     color: '#14b8a6',
-    gradient: 'linear-gradient(135deg, #14b8a6 0%, #2dd4bf 100%)',
+    gradient: 'linear-gradient(135deg, rgba(20, 184, 166, 0.3) 0%, rgba(45, 212, 191, 0.3) 100%)',
     tags: ['Music', 'Audio', 'Visualizer'],
   },
   {
@@ -52,7 +52,7 @@ export const sections = [
     icon: GameIcon,
     emoji: '🎮',
     color: '#f59e0b',
-    gradient: 'linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%)',
+    gradient: 'linear-gradient(135deg, rgba(245, 158, 11, 0.3) 0%, rgba(251, 191, 36, 0.3) 100%)',
     tags: ['Games', 'Interactive', 'Fun'],
   },
   {
@@ -63,7 +63,7 @@ export const sections = [
     icon: GoonIcon,
     emoji: '🚀',
     color: '#8b5cf6',
-    gradient: 'linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%)',
+    gradient: 'linear-gradient(135deg, rgba(139, 92, 246, 0.3) 0%, rgba(167, 139, 250, 0.3) 100%)',
     tags: ['Coming Soon', 'Special', 'Mystery'],
   },
 ];
