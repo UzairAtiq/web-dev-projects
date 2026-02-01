@@ -54,6 +54,9 @@
   padding: 40px;
   border-radius: 20px;
   min-height: 250px;
+  background: linear-gradient(135deg, rgba(0, 149, 255, 0.1), rgba(255, 214, 0, 0.1));
+  box-shadow: 0 8px 32px rgba(0, 149, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .weather-icon-large {
