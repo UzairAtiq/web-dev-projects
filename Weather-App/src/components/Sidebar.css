@@ -119,3 +119,35 @@
 .nav-item span {
   font-size: 0.75rem;
 }
+.city-search {
+  position: relative;
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.city-search .search-input {
+  width: 100%;
+  padding: 6px 8px;
+  border: none;
+  border-radius: 6px;
+  background: var(--card-bg);
+  color: var(--text-primary);
+}
+
+.city-search .search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--card-bg);
+  border-radius: 6px;
+  margin-top: 4px;
+  max-height: 180px;
+  overflow-y: auto;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.city-search .search-results li:hover {
+  background: rgba(255,255,255,0.1);
+}

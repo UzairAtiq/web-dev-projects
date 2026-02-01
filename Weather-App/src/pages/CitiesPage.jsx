@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 import './CitiesPage.css';
 import { Search, Sun, Cloud, Thermometer, Wind, Eye, Droplets, MapPin } from 'lucide-react';
 import { useWeather } from '../context/WeatherContext';
+
+const iconMap = {
+  Sun: <Sun color="var(--accent-yellow)" />,
+  Cloud: <Cloud />
+};
+
 import { citiesData } from '../data/cities';
 
 const CitiesPage = () => {
@@ -46,7 +52,7 @@ const CitiesPage = () => {
             >
               <div className="city-card-left">
                 <div className="city-icon-wrapper">
-                  {city.icon}
+                  {iconMap[city.icon]}
                 </div>
                 <div className="city-name-info">
                   <h3>{city.name} <MapPin size={14} className="pin-icon" /></h3>
