@@ -70,6 +70,8 @@
 .temperature {
   font-size: 5rem;
   font-weight: 700;
+  text-shadow: 0 0 30px rgba(0, 149, 255, 0.3),
+               0 0 60px rgba(0, 149, 255, 0.2);
 }
 
 .forecast-card {
