@@ -220,6 +220,17 @@
   align-items: center;
   padding-bottom: 15px;
   border-bottom: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 5px;
+}
+
+.weekly-item:hover {
+  background-color: rgba(0, 149, 255, 0.05);
+  transform: translateX(5px);
+  border-left: 3px solid var(--accent-blue);
+  padding-left: 12px;
 }
 
 .weekly-item:last-child {
