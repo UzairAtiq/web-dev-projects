@@ -62,18 +62,21 @@ input {
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
   background: var(--bg-color);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--card-bg);
   border-radius: 10px;
 }
 
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--accent-blue), #007acc);
+  border-radius: 10px;
+  border: 2px solid var(--bg-color);
+}
+
 ::-webkit-scrollbar-thumb:hover {
-  background: #303b4b;
+  background: linear-gradient(135deg, #00aaff, #0095ff);
 }
