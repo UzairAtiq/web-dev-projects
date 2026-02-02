@@ -92,8 +92,27 @@
 .temperature {
   font-size: 5rem;
   font-weight: 700;
-  text-shadow: 0 0 30px rgba(0, 149, 255, 0.3),
-               0 0 60px rgba(0, 149, 255, 0.2);
+  background: linear-gradient(135deg, #00d4ff, #0095ff, #00d4ff);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientFlow 3s ease infinite, tempGlow 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(0, 149, 255, 0.4));
+}
+
+@keyframes gradientFlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes tempGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 20px rgba(0, 149, 255, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 35px rgba(0, 212, 255, 0.7));
+  }
 }
 
 .forecast-card {
