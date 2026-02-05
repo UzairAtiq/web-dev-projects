@@ -91,10 +91,36 @@
   background-color: var(--bg-color);
   position: relative;
   cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.switch:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(0, 149, 255, 0.3);
 }
 
 .switch.active {
   background-color: var(--accent-blue);
+  box-shadow: 0 0 20px rgba(0, 149, 255, 0.5);
+}
+
+.switch::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.4s, height 0.4s;
+}
+
+.switch:active::before {
+  width: 60px;
+  height: 60px;
 }
 
 .switch::after {
@@ -106,7 +132,8 @@
   height: 20px;
   background-color: white;
   border-radius: 50%;
-  transition: transform 0.2s;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .switch.active::after {
