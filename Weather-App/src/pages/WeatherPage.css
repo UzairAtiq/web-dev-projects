@@ -282,6 +282,44 @@
 .condition-item {
   display: flex;
   gap: 15px;
+  padding: 15px;
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeInUp 0.6s ease-out backwards;
+  opacity: 0;
+}
+
+.condition-item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.condition-item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.condition-item:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.condition-item:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.condition-item:hover {
+  background: rgba(0, 149, 255, 0.1);
+  transform: translateX(5px);
+  box-shadow: -3px 0 0 var(--accent-blue);
 }
 
 .cond-icon {
