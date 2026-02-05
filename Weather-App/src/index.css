@@ -73,6 +73,12 @@ input {
   outline: none;
   border: none;
   font-family: inherit;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+input:focus {
+  transform: scale(1.01);
+  filter: drop-shadow(0 0 8px rgba(0, 149, 255, 0.3));
 }
 
 /* Custom Scrollbar */
