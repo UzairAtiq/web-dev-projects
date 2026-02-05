@@ -96,6 +96,33 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 15px;
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.notification-row::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 3px;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-yellow));
+  border-radius: 3px;
+  transform: scaleY(0);
+  transition: transform 0.3s ease;
+}
+
+.notification-row:hover {
+  background: rgba(0, 149, 255, 0.05);
+  transform: translateX(8px);
+  box-shadow: 0 4px 15px rgba(0, 149, 255, 0.1);
+}
+
+.notification-row:hover::before {
+  transform: scaleY(1);
 }
 
 .notif-text span {
