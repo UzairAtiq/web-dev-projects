@@ -59,12 +59,37 @@
   color: var(--text-secondary);
   font-size: 0.85rem;
   font-weight: 600;
-  transition: all 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.toggle-group button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(59, 77, 99, 0.5);
+  transition: left 0.3s ease;
+  z-index: 0;
+}
+
+.toggle-group button:hover::before {
+  left: 0;
+}
+
+.toggle-group button:hover {
+  transform: scale(1.05);
+  color: white;
 }
 
 .toggle-group button.active {
   background-color: #3B4D63;
   color: white;
+  box-shadow: 0 4px 12px rgba(0, 149, 255, 0.3);
+  transform: scale(1.02);
 }
 
 .notification-row {
