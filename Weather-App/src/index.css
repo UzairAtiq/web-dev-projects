@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Dark Theme (Default) */
+  --bg-color: #0B131E;
+  --card-bg: rgba(32, 43, 59, 0.6);
+  --sidebar-bg: rgba(32, 43, 59, 0.8);
+  --text-primary: #FFFFFF;
+  --text-secondary: #9399A2;
+  --accent-blue: #0095FF;
+  --accent-yellow: #FFD600;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --glass-blur: blur(12px);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='light'] {
+  --bg-color: #F0F4F8;
+  --card-bg: rgba(255, 255, 255, 0.6);
+  --sidebar-bg: rgba(230, 235, 241, 0.8);
+  --text-primary: #1A202C;
+  --text-secondary: #718096;
+  --border-color: rgba(0, 0, 0, 0.05);
+  --glass-border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Outfit', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+.glass-card {
+  background: var(--card-bg) !important;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--glass-border) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.18);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px 0 rgba(0, 149, 255, 0.25);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+input {
+  outline: none;
+  border: none;
+  font-family: inherit;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+input:focus {
+  transform: scale(1.01);
+  filter: drop-shadow(0 0 8px rgba(0, 149, 255, 0.3));
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--accent-blue), #007acc);
+  border-radius: 10px;
+  border: 2px solid var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #00aaff, #0095ff);
+}
