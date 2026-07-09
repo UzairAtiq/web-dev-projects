@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+@theme {
+  /* � Waifu Gallery Theme - Elegant Anime Aesthetic */
+  
+  /* Backgrounds - Soft midnight black */
+  --color-background: 15 15 20;     /* #0F0F14 - Deep midnight */
+  --color-foreground: 250 245 255;  /* #FAF5FF - Pearl white */
+  --color-card: 22 20 28;           /* #16141C - Card surfaces */
+  --color-card-foreground: 250 245 255;
+  --color-popover: 28 25 35;        /* #1C1923 - Elevated surfaces */
+  --color-popover-foreground: 250 245 255;
+  
+  /* Rose Primary - Crimson/Rose Red */
+  --color-primary: 225 29 72;       /* #E11D48 - Rose red */
+  --color-primary-foreground: 255 255 255;
+  
+  /* Secondary (dark purple-tinted) */
+  --color-secondary: 45 40 55;      /* #2D2837 */
+  --color-secondary-foreground: 250 245 255;
+  
+  /* Muted tones - Lavender hints */
+  --color-muted: 45 40 55;
+  --color-muted-foreground: 148 140 165;  /* #948CA5 */
+  
+  /* Accent (neon pink-magenta) */
+  --color-accent: 244 63 94;        /* #F43F5E - Neon rose */
+  --color-accent-foreground: 255 255 255;
+  
+  /* Destructive */
+  --color-destructive: 190 24 93;   /* Rose destructive */
+  --color-destructive-foreground: 255 255 255;
+  
+  /* Borders - Soft purple-tinted */
+  --color-border: 50 45 60;         /* #322D3C */
+  --color-input: 50 45 60;
+  --color-ring: 225 29 72;          /* Rose focus ring */
+  
+  --radius: 0.75rem;                /* Softer rounded corners */
+}
+
+/* Glow Keyframes */
+@keyframes rosePulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(225, 29, 72, 0.3), 0 0 40px rgba(244, 63, 94, 0.1); }
+  50% { box-shadow: 0 0 40px rgba(225, 29, 72, 0.5), 0 0 60px rgba(244, 63, 94, 0.2); }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.1); }
+}
+
+@keyframes fadeSlideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from { 
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to { 
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes gentleBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Global Styles */
+* {
+  border-color: hsl(var(--color-border));
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: linear-gradient(135deg, #0F0F14 0%, #16141C 50%, #0F0F14 100%);
+  color: hsl(var(--color-foreground));
+  font-family: var(--font-inter);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar - Waifu Style */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0F0F14;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #2D2837 0%, #3D3548 100%);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #E11D48 0%, #F43F5E 100%);
+}
+
+/* Selection - Rose Pink */
+::selection {
+  background: rgba(225, 29, 72, 0.3);
+  color: #FAF5FF;
+}
+
+/* Focus Ring - Rose Glow */
+*:focus-visible {
+  outline: 2px solid #E11D48;
+  outline-offset: 2px;
+}
+
+/* Rose Glow Effect Utility */
+.glow-rose {
+  box-shadow: 0 0 20px rgba(225, 29, 72, 0.4), 0 0 40px rgba(244, 63, 94, 0.1);
+}
+
+.glow-rose-lg {
+  box-shadow: 0 0 40px rgba(225, 29, 72, 0.5), 0 0 60px rgba(244, 63, 94, 0.2);
+}
+
+/* Card Hover Glow */
+.card-glow:hover {
+  box-shadow: 0 0 30px rgba(225, 29, 72, 0.3), 
+              0 0 60px rgba(244, 63, 94, 0.1);
+}
+
+/* Glass Effect for Headers */
+.glass-dark {
+  background: rgba(15, 15, 20, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(225, 29, 72, 0.15);
+}
