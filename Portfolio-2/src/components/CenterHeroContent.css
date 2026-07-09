@@ -1,0 +1,226 @@
+/* ═══════════════════════════════════════════════════════════
+   CenterHeroContent.css - Centered Hero Content Styles
+   ═══════════════════════════════════════════════════════════ */
+
+.center-hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  
+  pointer-events: none;
+}
+
+/* Decorative Rings */
+.decorative-rings {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  pointer-events: none;
+}
+
+.ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px solid var(--color-accent);
+  opacity: 0.15;
+}
+
+.ring-outer {
+  width: 550px;
+  height: 550px;
+  border-style: dashed;
+  animation: rotateRing 60s linear infinite;
+}
+
+.ring-middle {
+  width: 400px;
+  height: 400px;
+  border-width: 2px;
+  opacity: 0.1;
+  animation: rotateRing 45s linear infinite reverse;
+}
+
+.ring-inner {
+  width: 250px;
+  height: 250px;
+  border-style: dotted;
+  opacity: 0.2;
+  animation: rotateRing 30s linear infinite;
+}
+
+@keyframes rotateRing {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Hero Text Content */
+.hero-text {
+  position: relative;
+  z-index: 2;
+}
+
+/* Role Label */
+.hero-label {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.4em;
+  color: var(--color-accent);
+  margin-bottom: 1.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(50, 74, 95, 0.4);
+  background: rgba(27, 42, 65, 0.3);
+}
+
+/* Large Heading */
+.hero-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  margin-bottom: 2rem;
+}
+
+.heading-line {
+  font-family: var(--font-display);
+  font-size: 4.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+}
+
+.heading-accent {
+  font-style: normal;
+  background: linear-gradient(
+    135deg,
+    var(--color-accent) 0%,
+    var(--color-accent-light) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Subtitle */
+.hero-subtitle {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.8;
+  color: var(--color-text);
+  opacity: 0.7;
+  letter-spacing: 0.02em;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Responsive Styles - Prevent overlay with sidebar
+   ═══════════════════════════════════════════════════════════ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .decorative-rings {
+    width: 450px;
+    height: 450px;
+  }
+  
+  .ring-outer {
+    width: 420px;
+    height: 420px;
+  }
+  
+  .ring-middle {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .ring-inner {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .heading-line {
+    font-size: 3.5rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .center-hero-content {
+    width: 90%;
+    padding: 0 1rem;
+  }
+  
+  .decorative-rings {
+    width: 320px;
+    height: 320px;
+  }
+  
+  .ring-outer {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .ring-middle {
+    width: 220px;
+    height: 220px;
+  }
+  
+  .ring-inner {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .heading-line {
+    font-size: 2.5rem;
+  }
+  
+  .hero-label {
+    font-size: 0.65rem;
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.9rem;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  .heading-line {
+    font-size: 2rem;
+  }
+  
+  .decorative-rings {
+    width: 260px;
+    height: 260px;
+  }
+  
+  .ring-outer {
+    width: 240px;
+    height: 240px;
+  }
+  
+  .ring-middle {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .ring-inner {
+    width: 120px;
+    height: 120px;
+  }
+}
