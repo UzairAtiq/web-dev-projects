@@ -1,204 +1,164 @@
-import { motion } from 'framer-motion';
-import { FiGithub, FiLinkedin, FiMail, FiTwitter, FiSend } from 'react-icons/fi';
-import './Contact.css';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { useRef, useState } from 'react';
+import { HiMail, HiPhone } from 'react-icons/hi';
+import { FiCopy, FiCheck } from 'react-icons/fi';
 
-/**
- * Contact Component - Contact information and social links
- * Includes contact form and social media profiles
- */
 const Contact = () => {
-  // Animation variants
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 40 },
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  
+  const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copiedPhone, setCopiedPhone] = useState(false);
+
+  // Replace with your actual contact info
+  const email = "uzair@example.com";
+  const phone = "+92 XXX XXXXXXX";
+
+  const handleCopy = async (text, type) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      if (type === 'email') {
+        setCopiedEmail(true);
+        setTimeout(() => setCopiedEmail(false), 2000);
+      } else {
+        setCopiedPhone(true);
+        setTimeout(() => setCopiedPhone(false), 2000);
+      }
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  };
+
+  const headingVariants = {
+    hidden: { opacity: 0, y: -20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
-        ease: 'easeOut',
-      },
-    },
+        duration: 0.6
+      }
+    }
   };
 
-  const socialLinks = [
-    {
-      name: 'GitHub',
-      icon: <FiGithub />,
-      url: 'https://github.com/yourusername',
-      color: '#333',
-    },
-    {
-      name: 'LinkedIn',
-      icon: <FiLinkedin />,
-      url: 'https://linkedin.com/in/yourusername',
-      color: '#0077b5',
-    },
-    {
-      name: 'Twitter',
-      icon: <FiTwitter />,
-      url: 'https://twitter.com/yourusername',
-      color: '#1da1f2',
-    },
-    {
-      name: 'Email',
-      icon: <FiMail />,
-      url: 'mailto:your.email@example.com',
-      color: '#ea4335',
-    },
-  ];
+  const cardVariants = {
+    hidden: { opacity: 0, x: -50 },
+    visible: (delay) => ({
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.5,
+        delay
+      }
+    })
+  };
 
   return (
-    <section className="contact" id="contact">
-      <div className="container">
+    <section id="contact" className="min-h-screen py-20 px-6 md:px-12 lg:px-24 flex items-center">
+      <div className="max-w-container mx-auto w-full">
+        {/* Section Heading */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6 }}
+          ref={ref}
+          variants={headingVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="mb-16"
         >
-          <h2 className="section-title">Get In Touch</h2>
-          <div className="title-underline"></div>
-          <p className="section-subtitle">
-            Have a question or want to work together? Feel free to reach out!
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-text-primary mb-4">
+            GET IN TOUCH
+          </h2>
+          <div className="w-20 h-1 bg-accent-coral"></div>
+          <p className="text-lg text-text-secondary mt-6 max-w-2xl">
+            Have a project in mind or want to collaborate? Feel free to reach out. I'm always open to
+            discussing new opportunities and creative ideas.
           </p>
         </motion.div>
 
-        <div className="contact-content">
-          {/* Contact Form */}
+        {/* Contact Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
+          {/* Email Card */}
           <motion.div
-            className="contact-form-wrapper"
-            variants={fadeInUp}
+            custom={0.2}
+            variants={cardVariants}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            animate={isInView ? "visible" : "hidden"}
+            className="bg-bg-secondary border border-bg-tertiary rounded-lg p-6 hover:border-accent-coral transition-all duration-300 hover:shadow-xl hover:shadow-accent-coral/20"
           >
-            <form className="contact-form">
-              <div className="form-group">
-                <label htmlFor="name">Your Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  placeholder="John Doe"
-                  required
-                />
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-12 h-12 bg-accent-coral/20 rounded-lg flex items-center justify-center">
+                <HiMail className="text-2xl text-accent-coral" />
               </div>
-
-              <div className="form-group">
-                <label htmlFor="email">Your Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="john@example.com"
-                  required
-                />
+              <div>
+                <p className="text-text-secondary text-sm font-body mb-1">Email</p>
+                <p className="text-text-primary text-lg font-body font-semibold">{email}</p>
               </div>
-
-              <div className="form-group">
-                <label htmlFor="subject">Subject</label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  placeholder="Project Inquiry"
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="message">Message</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows="5"
-                  placeholder="Tell me about your project..."
-                  required
-                ></textarea>
-              </div>
-
-              <motion.button
-                type="submit"
-                className="submit-btn"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <FiSend /> Send Message
-              </motion.button>
-            </form>
+            </div>
+            <button
+              onClick={() => handleCopy(email, 'email')}
+              className="w-full px-4 py-2 bg-transparent border-2 border-accent-coral text-accent-coral rounded-md font-body font-semibold flex items-center justify-center gap-2 hover:bg-accent-coral hover:text-white transition-all duration-300"
+            >
+              {copiedEmail ? (
+                <>
+                  <FiCheck className="text-lg" />
+                  <span>Copied!</span>
+                </>
+              ) : (
+                <>
+                  <FiCopy className="text-lg" />
+                  <span>Copy Email</span>
+                </>
+              )}
+            </button>
           </motion.div>
 
-          {/* Contact Info & Social Links */}
+          {/* Phone Card */}
           <motion.div
-            className="contact-info"
-            variants={fadeInUp}
+            custom={0.4}
+            variants={cardVariants}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            animate={isInView ? "visible" : "hidden"}
+            className="bg-bg-secondary border border-bg-tertiary rounded-lg p-6 hover:border-accent-coral transition-all duration-300 hover:shadow-xl hover:shadow-accent-coral/20"
           >
-            <div className="info-card">
-              <h3>Let's Connect!</h3>
-              <p>
-                I'm always interested in hearing about new projects and
-                opportunities. Whether you have a question or just want to say
-                hi, I'll try my best to get back to you!
-              </p>
-
-              <div className="contact-details">
-                <div className="detail-item">
-                  <FiMail className="detail-icon" />
-                  <div>
-                    <h4>Email</h4>
-                    <a href="mailto:your.email@example.com">
-                      your.email@example.com
-                    </a>
-                  </div>
-                </div>
-
-                <div className="detail-item">
-                  <FiGithub className="detail-icon" />
-                  <div>
-                    <h4>GitHub</h4>
-                    <a
-                      href="https://github.com/yourusername"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      @yourusername
-                    </a>
-                  </div>
-                </div>
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-12 h-12 bg-accent-coral/20 rounded-lg flex items-center justify-center">
+                <HiPhone className="text-2xl text-accent-coral" />
+              </div>
+              <div>
+                <p className="text-text-secondary text-sm font-body mb-1">Phone</p>
+                <p className="text-text-primary text-lg font-body font-semibold">{phone}</p>
               </div>
             </div>
-
-            <div className="social-links">
-              <h4>Follow Me</h4>
-              <div className="social-icons">
-                {socialLinks.map((link, index) => (
-                  <motion.a
-                    key={index}
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="social-icon"
-                    aria-label={link.name}
-                    whileHover={{ scale: 1.1, y: -5 }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    {link.icon}
-                  </motion.a>
-                ))}
-              </div>
-            </div>
+            <button
+              onClick={() => handleCopy(phone, 'phone')}
+              className="w-full px-4 py-2 bg-transparent border-2 border-accent-coral text-accent-coral rounded-md font-body font-semibold flex items-center justify-center gap-2 hover:bg-accent-coral hover:text-white transition-all duration-300"
+            >
+              {copiedPhone ? (
+                <>
+                  <FiCheck className="text-lg" />
+                  <span>Copied!</span>
+                </>
+              ) : (
+                <>
+                  <FiCopy className="text-lg" />
+                  <span>Copy Phone</span>
+                </>
+              )}
+            </button>
           </motion.div>
         </div>
-      </div>
 
-      {/* Decorative elements */}
-      <div className="contact-bg">
-        <div className="bg-element element-1"></div>
-        <div className="bg-element element-2"></div>
+        {/* Toast notification */}
+        <AnimatePresence>
+          {(copiedEmail || copiedPhone) && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              className="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-accent-coral text-white px-6 py-3 rounded-lg shadow-lg font-body font-semibold z-50"
+            >
+              ✓ Copied to clipboard!
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );

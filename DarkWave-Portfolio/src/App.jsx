@@ -1,59 +1,67 @@
-import { useState, useEffect } from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Projects from './components/Projects';
-import Skills from './components/Skills';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
+import { useEffect } from 'react';
+import Navigation from './components/layout/Navigation';
+import HeroSection from './components/sections/HeroSection';
+import ServicesSection from './components/sections/ServicesSection';
+import WorksSection from './components/sections/WorksSection';
+import AboutSection from './components/sections/AboutSection';
+import ContactSection from './components/sections/ContactSection';
 import './App.css';
 
-/**
- * Main App Component
- * Orchestrates the portfolio layout and theme management
- */
 function App() {
-  // Theme state - default to dark theme
-  const [theme, setTheme] = useState('dark');
-
-  // Initialize theme from localStorage or system preference
+  // Custom cursor effect
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    if (savedTheme) {
-      setTheme(savedTheme);
-    } else if (prefersDark) {
-      setTheme('dark');
-    } else {
-      setTheme('light');
-    }
+    const cursor = document.createElement('div');
+    cursor.className = 'custom-cursor';
+    document.body.appendChild(cursor);
+
+    const moveCursor = (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+      cursor.classList.add('visible');
+    };
+
+    const addHoverEffect = () => cursor.classList.add('hover');
+    const removeHoverEffect = () => cursor.classList.remove('hover');
+
+    document.addEventListener('mousemove', moveCursor);
+
+    const interactiveElements = document.querySelectorAll('a, button, .work-preview, .service-card');
+    interactiveElements.forEach(el => {
+      el.addEventListener('mouseenter', addHoverEffect);
+      el.addEventListener('mouseleave', removeHoverEffect);
+    });
+
+    return () => {
+      document.removeEventListener('mousemove', moveCursor);
+      cursor.remove();
+    };
   }, []);
-
-  // Apply theme to document and save to localStorage
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-  }, [theme]);
-
-  // Toggle between light and dark themes
-  const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
-  };
 
   return (
     <div className="app">
-      <Navbar theme={theme} toggleTheme={toggleTheme} />
+      <Navigation />
       
-      <main>
-        <Hero />
-        <About />
-        <Projects />
-        <Skills />
-        <Contact />
-      </main>
+      <main className="main-content">
+        <section id="home" className="section">
+          <HeroSection />
+        </section>
 
-      <Footer />
+        <section id="services" className="section">
+          <ServicesSection />
+        </section>
+
+        <section id="works" className="section">
+          <WorksSection />
+        </section>
+
+        <section id="about" className="section">
+          <AboutSection />
+        </section>
+
+        <section id="contact" className="section">
+          <ContactSection />
+        </section>
+      </main>
     </div>
   );
 }
