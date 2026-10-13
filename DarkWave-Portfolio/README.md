@@ -1,5 +1,7 @@
 # Portfolio Website - Uzair Atiq
 
+![Portfolio Preview](./assets/Screenshot%202026-10-13%20at%208.08.47%E2%80%AFPM.png)
+
 A modern, responsive portfolio website with smooth scrolling and elegant animations.
 
 ## 🚀 Features
